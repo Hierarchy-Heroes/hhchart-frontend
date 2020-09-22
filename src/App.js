@@ -1,30 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Button from 'react-bootstrap/Button';
+import { ChartPage } from './components/chart-page/ChartPage';
+import { LoginPage } from './components/login-page/LoginPage';
+import { NavigationBar } from './components/navigation-bar/NavigationBar';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <Button>Hello</Button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+const App = () => (
+  <div>
+    <Router>
+      <NavigationBar />
+      <Switch>
+        <Route path="/login">
+          <LoginPage />
+        </Route>
+        <Route path="/">
+          <ChartPage />
+        </Route>
+      </Switch>
+    </Router>
+  </div>  
+);
 
 export default App;
