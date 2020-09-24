@@ -14,6 +14,7 @@ const OrgChart = (props) => {
       pan={true}
       zoom={true}
       NodeTemplate={ChartNode}
+      draggable={false}
     />)
 }
 

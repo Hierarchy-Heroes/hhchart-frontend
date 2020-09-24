@@ -1,43 +1,42 @@
 import React from 'react';
-import { OrgChart } from './Chart';
+import OrgChart from './Chart';
 
 const ds = {
   id: "n1",
-  name: "Lao Lao",
-  title: "general manager",
+  name: "Jamiya Alvarez",
+  title: "Chief Executive Officer",
   children: [
-    { id: "n2", name: "Bo Miao", title: "department manager" },
+    { id: "n2", name: "Lewis Watts", title: "Chief Operations Officer" },
     {
       id: "n3",
-      name: "Su Miao",
-      title: "department manager",
+      name: "Bridget Fyre",
+      title: "Chief Technology Officer",
       children: [
-        { id: "n4", name: "Tie Hua", title: "senior engineer" },
+        { id: "n4", name: "Tie Hua", title: "Senior Hardware Engineer" },
         {
           id: "n5",
-          name: "Hei Hei",
-          title: "senior engineer",
+          name: "Kaeden Cameron",
+          title: "Senior Software Engineer",
           children: [
-            { id: "n6", name: "Dan Dan", title: "engineer" },
-            { id: "n7", name: "Xiang Xiang", title: "engineer" }
+            { id: "n6", name: "Anabella Robbins", title: "Software Engineer I" },
+            { id: "n7", name: "Xiang Xiang", title: "Software Engineer I" }
           ]
         },
-        { id: "n8", name: "Pang Pang", title: "senior engineer" }
+        { id: "n8", name: "Dereon Patel", title: "Software Engineer II" }
       ]
     },
-    { id: "n9", name: "Hong Miao", title: "department manager" },
+    { id: "n9", name: "Shirley Knight", title: "Head Council" },
     {
       id: "n10",
-      name: "Chun Miao",
-      title: "department manager",
-      children: [{ id: "n11", name: "Yue Yue", title: "senior engineer" }]
+      name: "Carissa Rhodes",
+      title: "Chief Marketing Officer",
+      children: [{ id: "n11", name: "Raiden Mueller", title: "Marketing Director" }]
     }
   ]
 };
 
 export const ChartPage = props => (
   <div>
-    <span className="mx-auto">Chart page</span>
     <OrgChart datasource={ds} />
   </div>
 );
