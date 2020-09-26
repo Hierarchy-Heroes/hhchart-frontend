@@ -16,4 +16,5 @@ export const NavigationBar = props => (
       <Button variant="primary" href="/login">Log In</Button>
     </Form>
   </Navbar>
+  
 );
