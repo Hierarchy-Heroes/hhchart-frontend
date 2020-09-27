@@ -1,0 +1,28 @@
+    .user {
+        margin-top: 30px;
+        width: 200px;
+    }
+
+    .password {
+        margin-bottom: 23px;
+        width: 200px;
+    }
+
+    .submit {
+        justify-content: center;
+        display: inline;
+        text-align: center;
+        margin-right: 7px;
+    }
+
+    .forgot {
+        display: flex;
+        justify-content: center;
+        display: inline;
+        text-align: center;
+    }
+
+    .buttons {
+        display: table;
+        margin: auto;
+    }
