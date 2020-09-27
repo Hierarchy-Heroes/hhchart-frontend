@@ -8,18 +8,32 @@
         width: 200px;
     }
 
-    .submit {
+    .btn-primary {
         justify-content: center;
         display: inline;
         text-align: center;
         margin-right: 7px;
+        background-color: rgb(0, 130, 99);
+        border-color: rgb(0, 130, 99);
     }
 
-    .forgot {
+    .btn-primary:hover {
+        background-color: rgb(16, 110, 103);
+        border-color: rgb(0, 130, 99);
+    }
+
+    .btn-outline-primary {
         display: flex;
         justify-content: center;
         display: inline;
         text-align: center;
+        color: rgb(0, 130, 99);
+        border-color: rgb(0, 130, 99);
+    }
+
+    .btn-outline-primary:hover {
+        background-color: rgb(0, 130, 99);
+        border-color: rgb(0, 130, 99);
     }
 
     .buttons {
