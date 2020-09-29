@@ -4,8 +4,9 @@
   bottom: 0;
 }
 
-.sidebar {
+.chartPageSidebar {
   min-width: 20rem;
+  max-width: 20rem;
   min-height: 100%;
   margin-left: -20rem;
   padding: 0.875rem 1.25rem;

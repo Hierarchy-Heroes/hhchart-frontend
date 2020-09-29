@@ -51,7 +51,7 @@ export const ChartPage = props => {
 
   return (
     <div className="d-flex flex-row chartPage">
-      <div className={`bg-light border-right sidebar ${sidebarVisible ? "chartPageSidebarVisible" : ""}`}>
+      <div className={`bg-light border-right chartPageSidebar ${sidebarVisible ? "chartPageSidebarVisible" : ""}`}>
         <Sidebar node={currentNode} onClickClose={onClickClose}></Sidebar>
       </div>
       <OrgChart className="chartPageContentWrapper" datasource={ds} onClickNode={onClickNode} />
