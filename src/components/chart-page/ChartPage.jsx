@@ -1,5 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import OrgChart from './Chart';
+
+import './ChartPage.css';
+import Sidebar from './Sidebar';
 
 const ds = {
   id: "n1",
@@ -35,8 +38,23 @@ const ds = {
   ]
 };
 
-export const ChartPage = props => (
-  <div>
-    <OrgChart datasource={ds} />
-  </div>
-);
+export const ChartPage = props => {
+  const [currentNode, setCurrentNode] = useState(null);
+  const [sidebarVisible, setSidebarVisible] = useState(false);
+
+  const onClickNode = node => {
+    setCurrentNode(node);
+    setSidebarVisible(!!node);
+  };
+
+  const onClickClose = () => setSidebarVisible(false);
+
+  return (
+    <div className="d-flex flex-row chartPage">
+      <div className={`bg-light border-right sidebar ${sidebarVisible ? "chartPageSidebarVisible" : ""}`}>
+        <Sidebar node={currentNode} onClickClose={onClickClose}></Sidebar>
+      </div>
+      <OrgChart className="chartPageContentWrapper" datasource={ds} onClickNode={onClickNode} />
+    </div>
+  )
+};

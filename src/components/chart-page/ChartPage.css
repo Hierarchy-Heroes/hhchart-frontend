@@ -1,0 +1,40 @@
+.chartPage {
+  overflow-x: hidden;
+  min-height: 100vh;
+  bottom: 0;
+}
+
+.sidebar {
+  min-width: 20rem;
+  min-height: 100%;
+  margin-left: -20rem;
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+}
+
+.chartPageContentWrapper {
+  min-width: 100%;
+}
+
+.chartPageSidebarVisible {
+  margin-left: 0;
+}
+
+/* @media (min-width: 768px) {
+  .sidebar {
+    margin-left: 0;
+  }
+
+  .chartPageContentWrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .chartPage.toggled .sidebar {
+    margin-left: -15rem;
+  }
+} */
