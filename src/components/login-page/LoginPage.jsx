@@ -18,7 +18,7 @@ export const LoginPage = (props) => {
       </Form.Group>
 
       <div class = "buttons">
-        <Button type = "button" variant = "primary">Login</Button>
+        <Button href = "/" type = "button" variant = "primary">Log In</Button>
         <Button type = "button" variant = "outline-primary">Forgot password?</Button>
       </div>
 
