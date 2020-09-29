@@ -1,0 +1,42 @@
+    .user {
+        margin-top: 30px;
+        width: 200px;
+    }
+
+    .password {
+        margin-bottom: 23px;
+        width: 200px;
+    }
+
+    .btn-primary {
+        justify-content: center;
+        display: inline;
+        text-align: center;
+        margin-right: 7px;
+        background-color: rgb(0, 130, 99);
+        border-color: rgb(0, 130, 99);
+    }
+
+    .btn-primary:hover {
+        background-color: rgb(16, 110, 103);
+        border-color: rgb(0, 130, 99);
+    }
+
+    .btn-outline-primary {
+        display: flex;
+        justify-content: center;
+        display: inline;
+        text-align: center;
+        color: rgb(0, 130, 99);
+        border-color: rgb(0, 130, 99);
+    }
+
+    .btn-outline-primary:hover {
+        background-color: rgb(0, 130, 99);
+        border-color: rgb(0, 130, 99);
+    }
+
+    .buttons {
+        display: table;
+        margin: auto;
+    }
