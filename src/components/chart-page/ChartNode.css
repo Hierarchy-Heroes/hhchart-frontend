@@ -33,19 +33,25 @@
   /* height: 33px; */
 }
 
-.fullname {
+.oc-node .fullname {
   margin: 4px 0;
   line-height: 12px;
   height: 20px;
+  font-size: inherit;
   /* background-color: #CEE0D7; */
   /* border-radius: 4px; */
+  white-space: nowrap;
+  text-overflow: ellipsis;
   padding: 2px;
 }
 
-.title {
+.oc-node .title {
   line-height: 12px;
   height: 20px;
+  font-size: inherit;
   /* background-color: #CEE0D7; */
   /* border-radius: 4px; */
+  white-space: nowrap;
+  text-overflow: ellipsis;
   padding: 2px;
 }
