@@ -1,0 +1,25 @@
+.fullheightChart {
+  height: 100%;
+}
+
+.chartContainer {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.chart {
+  height: 100%;
+  background: none;  
+}
+
+.orgchart > ul > li > ul li::before {
+  border-top-color: #000000;
+}
+
+.orgchart > ul > li > ul li .oc-node::before,
+.orgchart ul li .oc-node:not(:only-child)::after {
+  background-color: #000000;
+}
+
