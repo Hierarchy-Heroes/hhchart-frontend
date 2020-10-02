@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+
+.routerContainer {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
