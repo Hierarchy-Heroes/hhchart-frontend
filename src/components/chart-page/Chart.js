@@ -11,18 +11,16 @@ import './Chart.css';
   */
 const OrgChart = (props) => {
   return (
-    <div className="fullheightChart">
-      <OrganizationChart 
-        containerClass="chartContainer"
-        chartClass="chart"
-        datasource={props.datasource}
-        onClickNode={props.onClickNode}
-        pan={true}
-        // zoom={true}
-        NodeTemplate={ChartNode}
-        draggable={false}
-      />
-    </div>  
+    <OrganizationChart
+      containerClass="chartContainer"
+      chartClass="chart"
+      datasource={props.datasource}
+      onClickNode={props.onClickNode}
+      pan={true}
+      // zoom={true}
+      NodeTemplate={ChartNode}
+      draggable={false}
+    />
   );
 };
 

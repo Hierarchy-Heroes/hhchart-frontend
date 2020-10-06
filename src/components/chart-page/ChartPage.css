@@ -1,6 +1,6 @@
 .chartPage {
   overflow-x: hidden;
-  min-height: 100vh;
+  flex-grow: 1;
   bottom: 0;
 }
 
