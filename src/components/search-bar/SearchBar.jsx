@@ -55,6 +55,7 @@ const SearchBar = (props) => {
             id='search'
             type='text'
             placeholder='Search Organization'
+            autoFocus
             value={inputValue}
             onChange={(e) => {
               setInputValue(e.target.value);
