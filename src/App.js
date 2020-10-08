@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 import { ChartPage } from './components/chart-page/ChartPage';
 import { LoginPage } from './components/login-page/LoginPage';
