@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import OrgChart from './Chart';
+import SearchBar from '../search-bar/SearchBar';
 
 import './ChartPage.css';
 import Sidebar from './Sidebar';
@@ -41,6 +42,7 @@ const ds = {
 export const ChartPage = props => {
   const [currentNode, setCurrentNode] = useState(null);
   const [sidebarVisible, setSidebarVisible] = useState(false);
+  // const [searchVisibile, setSearchVisible] = useState(true);
 
   const onClickNode = node => {
     setCurrentNode(node);
@@ -54,6 +56,7 @@ export const ChartPage = props => {
       <div className={`bg-light border-right chartPageSidebar ${sidebarVisible ? "chartPageSidebarVisible" : ""}`}>
         <Sidebar node={currentNode} onClickClose={onClickClose}></Sidebar>
       </div>
+      <SearchBar visible={true} onClose={()=>{}}/>
       <OrgChart className="chartPageContentWrapper" datasource={ds} onClickNode={onClickNode} />
     </div>
   )
