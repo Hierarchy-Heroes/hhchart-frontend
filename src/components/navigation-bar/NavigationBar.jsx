@@ -1,9 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './NavBar.css';
 import { Nav, Button, Navbar, Form, FormControl, DropdownButton, Dropdown, } from 'react-bootstrap';
+import AddEmployeeModal from '../modals/AddEmployeeModal';
 
 
 const NavigationBar = (props) => {
+  const [addEmployeeVisible, setAddEmployeeVisible] = useState(false);
+
+  const openAddEmployee = () => setAddEmployeeVisible(true);
+  const closeAddEmployee = () => setAddEmployeeVisible(false);
 
   if(props.isLoggedIn === 'false'){
     return (
@@ -28,6 +33,10 @@ const NavigationBar = (props) => {
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />
           <Button variant="outline-light" className="mr-sm-2">Search</Button>
         </Form>
+        <div>
+          <AddEmployeeModal isOpen={addEmployeeVisible} onClickClose={closeAddEmployee}></AddEmployeeModal>
+          <Button variant="outline-light" className="mr-sm-2" onClick={openAddEmployee}>Add Employee</Button>
+        </div>
         <DropdownButton className="account-btn" noCaret variant="outline-light" title=
           {<div className="user-icon">
           <i class="fas fa-user-circle" id="profile-icon"></i>
