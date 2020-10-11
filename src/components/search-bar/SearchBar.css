@@ -105,9 +105,10 @@
   align-items: center;
 }
 
-.result:hover {
+.result:hover, .result:focus {
   text-decoration: none;
-  color: rgb(0, 130, 100);
+  background-color: #008264;
+  color: #fff;
 }
 
 .result ul {

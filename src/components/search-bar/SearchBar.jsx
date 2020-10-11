@@ -17,11 +17,11 @@ const filter_results = (input, data) => {
 const Result = (props) => {
   return (
     <li>
-      <a className="result" href="#">
+      <a className="result" href={`#${props.result.id}`} onClick={() => props.onClick(props.result)}>
         <i class="fas fa-user-circle"></i>
         <ul>
-          <li>{props.name}</li>
-          <li>{props.title}</li>
+          <li>{props.result.name}</li>
+          <li>{props.result.title}</li>
         </ul>
       </a>
     </li>
@@ -52,7 +52,7 @@ const SearchBar = (props) => {
         </div>
         <div className="results-container">
           <ul>
-            {results.map(({ item }) => <Result name={item.name} title={item.title} />)}
+            {results.map(({ item }) => <Result result={item} onClick={props.onClickResult} />)}
           </ul>
         </div>
       </div>

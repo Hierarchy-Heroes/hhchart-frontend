@@ -71,7 +71,17 @@ export const ChartPage = props => {
       <div className={`bg-light border-right chartPageSidebar ${sidebarVisible ? "chartPageSidebarVisible" : ""}`}>
         <Sidebar node={currentNode} onClickClose={onClickClose}></Sidebar>
       </div>
-      <SearchBar data={list_data} visible={searchVisibile} handleClickOut={() => setSearchVisible(false)} />
+      <SearchBar
+        data={list_data} 
+        visible={searchVisibile}
+        handleClickOut={() => setSearchVisible(false)}
+        onClickResult={(result) => {
+          setCurrentNode(result);
+          setSidebarVisible(!!result);
+          setSearchVisible(false);
+          // document.getElementById(result.id).classList.add('selected');
+        }}
+      />
       <OrgChart className="chartPageContentWrapper" datasource={ds} onClickNode={onClickNode} />
       <Button className="fab" onClick={() => setSearchVisible(!searchVisibile)}><i class="fas fa-search"></i></Button>
     </div>
