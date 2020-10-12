@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const ChartNode = ({ nodeData }) => {
   return (
-    <div id={nodeData.id} className='container'>
+    <div id={nodeData._id} className='container'>
       <svg className='portrait' width="45" height="45" viewBox="0 0 178 178" fill="none" xmlns="http://www.w3.org/2000/svg">
         <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="178" height="178">
           <circle cx="89" cy="89" r="89" fill="white" />
@@ -16,8 +16,8 @@ const ChartNode = ({ nodeData }) => {
       </svg>
       {/* <img className='portrait' src='https://www.materialui.co/materialIcons/social/person_black_144x144.png' /> */}
       <div className='content-container'>
-        <div className='fullname'>{nodeData.name}</div>
-        <div className='title'>{nodeData.title}</div>
+        <div className='fullname'>{nodeData.firstName} {nodeData.lastName}</div>
+        <div className='title'>{nodeData.positionTitle}</div>
       </div>
     </div>
   )

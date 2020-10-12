@@ -8,20 +8,24 @@ const filter_results = (input, data) => {
     search_prefix = input.split(':')[0];
     input = input.split(':')[1];
   }
-  const fuse = new Fuse(data, { keys: [search_prefix] });
+  let fuse;
+  if (search_prefix === 'name') {
+    fuse = new Fuse(data, { keys: ['firstName', 'lastName'] })
+  } else {
+    fuse = new Fuse(data, { keys: [search_prefix] });
+  }
   // let search_dict = data.reduce((map, obj) => (map[obj[search_prefix]] = obj, map), {});
-  // console.log(fuse.search(input));
   return fuse.search(input);
 }
 
 const Result = (props) => {
   return (
     <li>
-      <a className="result" href={`#${props.result.id}`} onClick={() => props.onClick(props.result)}>
+      <a className="result" href={`#${props.result._id}`} onClick={() => props.onClick(props.result)}>
         <i class="fas fa-user-circle"></i>
         <ul>
-          <li>{props.result.name}</li>
-          <li>{props.result.title}</li>
+          <li>{props.result.firstName} {props.result.lastName}</li>
+          <li>{props.result.positionTitle}</li>
         </ul>
       </a>
     </li>
