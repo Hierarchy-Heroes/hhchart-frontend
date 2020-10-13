@@ -24,10 +24,6 @@ const NavigationBar = (props) => {
         <Navbar.Brand className="title" href="/">Hierarchy Heroes</Navbar.Brand>
         <Nav className="mr-auto">
         </Nav>
-        <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-light" className="mr-sm-2">Search</Button>
-        </Form>
         <DropdownButton className="account-btn" noCaret variant="outline-light" title=
           {<div className="user-icon">
           <i class="fas fa-user-circle" id="profile-icon"></i>

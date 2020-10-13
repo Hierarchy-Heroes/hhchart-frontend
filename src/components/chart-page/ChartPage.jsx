@@ -1,46 +1,48 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import OrgChart from './Chart';
-
-import './ChartPage.css';
+import { SearchBar } from '../search-bar/SearchBar';
 import Sidebar from './Sidebar';
-
-const ds = {
-  id: "n1",
-  name: "Jamiya Alvarez",
-  title: "Chief Executive Officer",
-  children: [
-    { id: "n2", name: "Lewis Watts", title: "Chief Operations Officer" },
-    {
-      id: "n3",
-      name: "Bridget Fyre",
-      title: "Chief Technology Officer",
-      children: [
-        { id: "n4", name: "Tie Hua", title: "Senior Hardware Engineer" },
-        {
-          id: "n5",
-          name: "Kaeden Cameron",
-          title: "Senior Software Engineer",
-          children: [
-            { id: "n6", name: "Anabella Robbins", title: "Software Engineer I" },
-            { id: "n7", name: "Xiang Xiang", title: "Software Engineer I" }
-          ]
-        },
-        { id: "n8", name: "Dereon Patel", title: "Software Engineer II" }
-      ]
-    },
-    { id: "n9", name: "Shirley Knight", title: "Head Council" },
-    {
-      id: "n10",
-      name: "Carissa Rhodes",
-      title: "Chief Marketing Officer",
-      children: [{ id: "n11", name: "Raiden Mueller", title: "Marketing Director" }]
-    }
-  ]
-};
+import { Button } from 'react-bootstrap';
+import './ChartPage.css';
 
 export const ChartPage = props => {
+  const [treeData, setTreeData] = useState({});
+  const [flatData, setFlatData] = useState([]);
   const [currentNode, setCurrentNode] = useState(null);
   const [sidebarVisible, setSidebarVisible] = useState(false);
+  const [searchVisibile, setSearchVisible] = useState(false);
+
+  const getCollection = async (collection) => {
+    const authToken = window.sessionStorage.getItem('authToken');
+    const companyName = window.sessionStorage.getItem('companyName');
+    const url = `http://localhost:3000/employees/${companyName}/${collection}`;
+    try {
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'auth-token': authToken,
+        },
+      })
+      if (response.ok) {
+        const json = await response.json();
+        // console.log(json);
+        switch (collection) {
+          case 'tree':
+            setTreeData(json[0]);
+            break;
+          case 'flat':
+            setFlatData(json);
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    getCollection('tree');
+    getCollection('flat');
+  }, []);
 
   const onClickNode = node => {
     setCurrentNode(node);
@@ -54,7 +56,19 @@ export const ChartPage = props => {
       <div className={`bg-light border-right chartPageSidebar ${sidebarVisible ? "chartPageSidebarVisible" : ""}`}>
         <Sidebar node={currentNode} onClickClose={onClickClose}></Sidebar>
       </div>
-      <OrgChart className="chartPageContentWrapper" datasource={ds} onClickNode={onClickNode} />
+      <SearchBar
+        data={flatData}
+        visible={searchVisibile}
+        handleClickOut={() => setSearchVisible(false)}
+        onClickResult={(result) => {
+          setCurrentNode(result);
+          setSidebarVisible(!!result);
+          setSearchVisible(false);
+          // document.getElementById(result.id).classList.add('selected');
+        }}
+      />
+      <OrgChart className="chartPageContentWrapper" datasource={treeData} onClickNode={onClickNode} />
+      <Button className="fab" onClick={() => setSearchVisible(!searchVisibile)}><i class="fas fa-search"></i></Button>
     </div>
   )
 };
