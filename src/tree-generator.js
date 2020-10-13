@@ -33,7 +33,7 @@ const generateTree = size => {
         queue.shift();
 
         let foo = [];
-        for (let i = 0; i < Math.min(nodesLeft, 5); ++i) {
+        for (let i = 0; i < Math.min(nodesLeft, 2); ++i) {
             foo.push({
                 firstName: rand(12),
                 lastName: rand(12),
@@ -58,6 +58,8 @@ const generateTree = size => {
 http.createServer((request, response) => {
     const q = url.parse(request.url, true).query;
 
+    response.setHeader("Access-Control-Allow-Origin", "*");
     response.write(JSON.stringify(generateTree(q.size)));
+
     response.end();
 }).listen(9000);
