@@ -1,18 +1,14 @@
-.user {
-    margin-top: 30px;
-    width: 200px;
-}
-
-.password {
-    margin-bottom: 23px;
-    width: 200px;
+.login-container {
+    margin: 10px auto;
+    display: table;
+    /* width: fit-content; */
 }
 
 .loginButtons {
     justify-content: center;
     display: inline;
     text-align: center;
-    margin-right: 7px;
+    margin: 7px;
     border-color: rgb(0, 130, 99);
 }
 
@@ -47,6 +43,6 @@
 }
 
 .buttons {
-    display: table;
+    display: flex;
     margin: auto;
 }
