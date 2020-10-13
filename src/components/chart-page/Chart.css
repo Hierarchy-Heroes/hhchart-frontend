@@ -1,16 +1,17 @@
-.fullheightChart {
-  height: 100%;
-}
-
 .chartContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
   margin: 0;
   border: none;
   border-radius: 0;
   overflow: hidden;
+  height: 100%;
+  /* background-color: #00826433; */
 }
 
 .chart {
-  height: 100%;
   background: none;  
 }
 
