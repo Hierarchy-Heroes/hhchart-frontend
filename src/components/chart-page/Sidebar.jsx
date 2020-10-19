@@ -1,116 +1,99 @@
 import React from 'react';
 
-import {Button, Card, ListGroup} from "react-bootstrap";
+import { Button, Card, ListGroup } from "react-bootstrap";
 
 const Sidebar = ({ node, onClickClose }) => {
   return node && (
-    <>
+    <div>
       <Button className="mb-4" onClick={onClickClose}>Close</Button>
       <Card className="mb-4">
-<<<<<<< Updated upstream
-        <Card.Img variant="top" src="/logo512.png" />
-        <Card.Body>
-          <Card.Title>{node.name}</Card.Title>
-          <Card.Text>{node.title}</Card.Text>
+        <Card.Img variant="top" src="/logo512.png" height="250px" />
+        <Card.Body className="employee-display-info">
+          <Card.Title>{node.firstName} {node.lastName}</Card.Title>
+          <Card.Text>{node.positionTitle}</Card.Text>
+          {/* <Card.Text>{node._id}</Card.Text> */}
         </Card.Body>
       </Card>
-      {/* probably gonna need to change these */}
-      <ListGroup>
-        <ListGroup.Item action>Promote</ListGroup.Item>
-        <ListGroup.Item action>Demote</ListGroup.Item>
-        <ListGroup.Item action>Delete</ListGroup.Item>
-        <ListGroup.Item action>Change manager...</ListGroup.Item>
-      </ListGroup>
-    </>
-=======
-          <Card.Img variant="top" src="/logo512.png" height="250px" />
-          <Card.Body className="employee-display-info">
-            <Card.Title>{node.firstName} {node.lastName}</Card.Title>
-            <Card.Text>{node.positionTitle}</Card.Text>
-            {/* <Card.Text>{node._id}</Card.Text> */}
-          </Card.Body>
-        </Card>
       {/*This is a card that contains an accordion.  Inside each accordion card, there is a nested form*/}
       <Card>
-          <Accordion>
-            {/*This is the 'edit employee' section button*/}
-            <Card>
-              <Card.Header>
-                <Accordion.Toggle as={Button} variant="none" eventKey="0">
-                  Edit Employee<i className="fas fa-edit"></i>
-                </Accordion.Toggle>
-              </Card.Header>
-              <Accordion.Collapse eventKey="0">
-                <Card.Body>
-                  <Form className="form-body">
-                    <Form.Group>
-                      <Form.Label>Name</Form.Label>
-                      <Form.Control className="placeholder-text" type="text" placeholder="New Name" />
-                    </Form.Group>
-                    <Form.Group>
-                      <Form.Label>Title</Form.Label>
-                      <Form.Control className="placeholder-text" type="text" placeholder="New Title" />
-                    </Form.Group>
-                    <Form.Group>
-                      <Form.Label>Email</Form.Label>
-                      <Form.Control className="placeholder-text" type="text" placeholder="New Email"/>
-                    </Form.Group>
-                  </Form>
-                  <Col className="text-center">
-                    <Button id="request-btn" variant="none" className="mb" onClick={onClickClose}>Update</Button>
-                  </Col>
-                </Card.Body>
-              </Accordion.Collapse>
-            </Card>
-            {/*This is the 'move employee' section*/}
-            <Card>
-              <Card.Header>
-                <Accordion.Toggle as={Button} variant="none" eventKey="1">
+        <Accordion>
+          {/*This is the 'edit employee' section button*/}
+          <Card>
+            <Card.Header>
+              <Accordion.Toggle as={Button} variant="none" eventKey="0">
+                Edit Employee<i className="fas fa-edit"></i>
+              </Accordion.Toggle>
+            </Card.Header>
+            <Accordion.Collapse eventKey="0">
+              <Card.Body>
+                <Form className="form-body">
+                  <Form.Group>
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control className="placeholder-text" type="text" placeholder="New Name" />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label>Title</Form.Label>
+                    <Form.Control className="placeholder-text" type="text" placeholder="New Title" />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control className="placeholder-text" type="text" placeholder="New Email" />
+                  </Form.Group>
+                </Form>
+                <Col className="text-center">
+                  <Button id="request-btn" variant="none" className="mb" onClick={onClickClose}>Update</Button>
+                </Col>
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+          {/*This is the 'move employee' section*/}
+          <Card>
+            <Card.Header>
+              <Accordion.Toggle as={Button} variant="none" eventKey="1">
                 Move Employee<i class="fas fa-exchange-alt"></i>
-                </Accordion.Toggle>
-              </Card.Header>
+              </Accordion.Toggle>
+            </Card.Header>
 
-              <Accordion.Collapse eventKey="1">
-                <Card.Body>
-                  <Form className="form-body">
-                    <Form.Group>
-                      <Form.Label>Enter New Manager</Form.Label>
-                      <Form.Control className="placeholder-text" type="text" placeholder="New Manager" />
-                    </Form.Group>
-                  </Form>
-                  <Col className="text-center">
-                    <Button id="request-btn" variant="none" className="mb" onClick={onClickClose}>Request Move</Button>
-                  </Col>
-                </Card.Body>
-              </Accordion.Collapse>
-            </Card>
+            <Accordion.Collapse eventKey="1">
+              <Card.Body>
+                <Form className="form-body">
+                  <Form.Group>
+                    <Form.Label>Enter New Manager</Form.Label>
+                    <Form.Control className="placeholder-text" type="text" placeholder="New Manager" />
+                  </Form.Group>
+                </Form>
+                <Col className="text-center">
+                  <Button id="request-btn" variant="none" className="mb" onClick={onClickClose}>Request Move</Button>
+                </Col>
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
 
-            {/*This is the 'delete employee' section*/}
-            <Card>
-              <Card.Header>
-  <Accordion.Toggle as={Button} variant="none" eventKey="2">Delete Employee<i className="fas fa-user-minus"></i></Accordion.Toggle>
-              </Card.Header>
+          {/*This is the 'delete employee' section*/}
+          <Card>
+            <Card.Header>
+              <Accordion.Toggle as={Button} variant="none" eventKey="2">Delete Employee<i className="fas fa-user-minus"></i></Accordion.Toggle>
+            </Card.Header>
 
-              <Accordion.Collapse eventKey="2">
-                <Card.Body>
-                  <Form className="form-body">
-                    <Form.Group>
-                      <Form.Label>Enter Current Manager</Form.Label>
-                      <Form.Control className="placeholder-text" type="text" placeholder="Manager" />
-                    </Form.Group>
-                  </Form>
-                  <Col className="text-center">
-                    <Button id="request-btn" variant="none" className="mb" onClick={onClickClose}>Request Deletion</Button>
-                  </Col>
-                </Card.Body>
-              </Accordion.Collapse>
+            <Accordion.Collapse eventKey="2">
+              <Card.Body>
+                <Form className="form-body">
+                  <Form.Group>
+                    <Form.Label>Enter Current Manager</Form.Label>
+                    <Form.Control className="placeholder-text" type="text" placeholder="Manager" />
+                  </Form.Group>
+                </Form>
+                <Col className="text-center">
+                  <Button id="request-btn" variant="none" className="mb" onClick={onClickClose}>Request Deletion</Button>
+                </Col>
+              </Card.Body>
+            </Accordion.Collapse>
 
           </Card>
-          
-          </Accordion>
-        </Card>
+
+        </Accordion>
+      </Card>
     </div>
->>>>>>> Stashed changes
   );
 };
 
