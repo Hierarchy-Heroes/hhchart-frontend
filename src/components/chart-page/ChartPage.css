@@ -23,6 +23,38 @@
 
 .chartPageSidebarVisible {
   margin-left: 0;
+<<<<<<< Updated upstream
+=======
+  overflow-y: auto;
+}
+
+.placeholder-text{
+  font-size: 13px;
+}
+
+
+.card-header{
+  text-align: center;
+}
+
+.employee-display-info{
+  text-align: center;
+}
+
+.fa-exchange-alt{
+  font-size: 25px;
+  margin-left: 32px;
+}
+
+.fa-user-minus{
+  font-size: 25px;
+  margin-left: 30px;
+}
+
+.fa-edit{
+  font-size: 25px;
+  margin-left: 50px;
+>>>>>>> Stashed changes
 }
 
 .fab {
@@ -32,6 +64,7 @@
   height: 50px;
   width: 50px;
   border-radius: 50%;
+  box-shadow: 0 2px 6px 0 #00000040;
 }
 
 /* @media (min-width: 768px) {
