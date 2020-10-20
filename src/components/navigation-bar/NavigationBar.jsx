@@ -49,7 +49,7 @@ const NavigationBar = (props) => {
     );
   }
 
-  else{
+  else {
     return null;
   }
 
