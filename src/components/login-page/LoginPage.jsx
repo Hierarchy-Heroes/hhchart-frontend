@@ -9,7 +9,7 @@ export const LoginPage = (props) => {
     e.preventDefault();
     const form = e.currentTarget;
     // resquest = server + port + auth/login
-    const url = 'http://localhost:3000/auth/login';
+    const url = 'http://deniz-pc:3000/auth/login';
     const body = {
       'email': form.email.value,
       'companyName': form.company.value,
