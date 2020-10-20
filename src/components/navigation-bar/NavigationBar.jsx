@@ -5,18 +5,17 @@ import AddEmployeeForm from '../add-employee-form/AddEmployeeForm';
 import { useHistory } from 'react-router-dom';
 
 const NavigationBar = (props) => {
+  const [addEmployeeVisible, setAddEmployeeVisible] = useState(false);
   const history = useHistory();
+
+  const onClickOpen = () => setAddEmployeeVisible(true);
+  const onClickClose = () => setAddEmployeeVisible(false);
 
   const logout = () => {
     window.sessionStorage.removeItem('authToken');
     window.sessionStorage.removeItem('companyName')
     history.push('/login')
   }
-
-  const [addEmployeeVisible, setAddEmployeeVisible] = useState(false);
-
-  const openAddEmployee = () => setAddEmployeeVisible(true);
-  const closeAddEmployee = () => setAddEmployeeVisible(false);
 
   if(props.isLoggedIn === 'false'){
     return (
@@ -42,8 +41,8 @@ const NavigationBar = (props) => {
           <Button variant="outline-light" className="mr-sm-2">Search</Button>
         </Form>
         <div>
-          <AddEmployeeForm isOpen={addEmployeeVisible} onClickClose={closeAddEmployee}></AddEmployeeForm>
-          <Button variant="outline-light" className="mr-sm-2" onClick={openAddEmployee}>Add Employee</Button>
+          <AddEmployeeForm visible={addEmployeeVisible} onClickClose={onClickClose}></AddEmployeeForm>
+          <Button variant="outline-light" className="mr-sm-2" onClick={onClickOpen}>Add Employee</Button>
         </div>
         <DropdownButton className="account-btn" noCaret variant="outline-light" title=
           {<div className="user-icon">

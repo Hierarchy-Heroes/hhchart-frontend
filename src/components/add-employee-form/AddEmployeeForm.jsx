@@ -1,14 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Modal, Button, Form } from "react-bootstrap";
 
-const AddEmployeeForm = ({ isOpen, onClickClose }) => {
-  const [show, setShow] = useState(isOpen);
-
-  const handleClose = () => {
-    onClickClose();
-    setShow(false);
-  };
-
+const AddEmployeeForm = ({ visible, onClickClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -38,7 +31,9 @@ const AddEmployeeForm = ({ isOpen, onClickClose }) => {
       'isManager': false,
       'employeeId': 99999,
       'email': form.email.value,
-      'startDate': ''
+      'startDate': '10/20/2020'
+      //managerId
+      //teamId
     }
     try {
       const response = await fetch(url, {
@@ -52,6 +47,7 @@ const AddEmployeeForm = ({ isOpen, onClickClose }) => {
       const text = await response.text();
       if (response.ok) {
         console.log(text);
+        onClickClose();
       } else {
         alert(text);
       }
@@ -63,17 +59,16 @@ const AddEmployeeForm = ({ isOpen, onClickClose }) => {
 
   return (
     <Modal
-      show={show}
-      onHide={handleClose}
+      show={visible}
+      onHide={onClickClose}
       size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered={true}
       backdrop="static"
+      centered={true}
       keyboard={false}
-      animation={false}
+      animation={true}
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">Add Employee</Modal.Title>
+        <Modal.Title>Add Employee</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
@@ -97,14 +92,12 @@ const AddEmployeeForm = ({ isOpen, onClickClose }) => {
             <Form.Check type="checkbox" label="Manager" name="isManager" />
           </Form.Group>
 
-          <div> 
+          <div>
             <Button className="mr-sm-2" variant="primary" type="submit">Add Employee</Button>
-            <Button variant="secondary" onClick={handleClose}>Cancel</Button>
+            <Button variant="secondary" onClick={onClickClose}>Cancel</Button>
           </div>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-      </Modal.Footer>
     </Modal>
   );
 };
