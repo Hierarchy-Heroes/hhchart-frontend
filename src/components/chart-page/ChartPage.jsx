@@ -17,7 +17,7 @@ export const ChartPage = props => {
   const getCollection = async (collection) => {
     const authToken = window.sessionStorage.getItem('authToken');
     const companyName = window.sessionStorage.getItem('companyName');
-    const url = `http://deniz-pc:3000/employees/${companyName}/${collection}`;
+    const url = `http://localhost:3000/employees/${companyName}/${collection}`;
     try {
       const response = await fetch(url, {
         method: 'GET',
