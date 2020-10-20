@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './NavBar.css';
 import { Nav, Button, Navbar, Form, FormControl, DropdownButton, Dropdown, } from 'react-bootstrap';
-import AddEmployeeModal from '../modals/AddEmployeeModal';
+import AddEmployeeForm from '../add-employee-form/AddEmployeeForm';
 
 
 const NavigationBar = (props) => {
@@ -34,7 +34,7 @@ const NavigationBar = (props) => {
           <Button variant="outline-light" className="mr-sm-2">Search</Button>
         </Form>
         <div>
-          <AddEmployeeModal isOpen={addEmployeeVisible} onClickClose={closeAddEmployee}></AddEmployeeModal>
+          <AddEmployeeForm isOpen={addEmployeeVisible} onClickClose={closeAddEmployee}></AddEmployeeForm>
           <Button variant="outline-light" className="mr-sm-2" onClick={openAddEmployee}>Add Employee</Button>
         </div>
         <DropdownButton className="account-btn" noCaret variant="outline-light" title=
