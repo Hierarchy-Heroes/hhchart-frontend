@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, Card, ListGroup } from "react-bootstrap";
+import { Accordion, Button, Card, Col, Form, ListGroup } from "react-bootstrap";
 
 const Sidebar = ({ node, onClickClose }) => {
   return node && (
