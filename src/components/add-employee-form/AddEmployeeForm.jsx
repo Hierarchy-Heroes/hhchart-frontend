@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import { Modal, Button, Form } from "react-bootstrap";
 
 const AddEmployeeForm = ({ isOpen, onClickClose }) => {

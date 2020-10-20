@@ -4,6 +4,7 @@ import { SearchBar } from '../search-bar/SearchBar';
 import Sidebar from './Sidebar';
 import { Button } from 'react-bootstrap';
 import './ChartPage.css';
+import { useHistory } from 'react-router-dom';
 
 export const ChartPage = props => {
   const [treeData, setTreeData] = useState({});
@@ -11,6 +12,7 @@ export const ChartPage = props => {
   const [currentNode, setCurrentNode] = useState(null);
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [searchVisibile, setSearchVisible] = useState(false);
+  const history = useHistory();
 
   const getCollection = async (collection) => {
     const authToken = window.sessionStorage.getItem('authToken');
@@ -33,6 +35,8 @@ export const ChartPage = props => {
           case 'flat':
             setFlatData(json);
         }
+      } else if (response.status === 400) {
+        history.push('/login');
       }
     } catch (err) {
       console.log(err);

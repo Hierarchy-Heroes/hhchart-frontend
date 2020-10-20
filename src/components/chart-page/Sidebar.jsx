@@ -15,11 +15,11 @@ const Sidebar = ({ node, onClickClose }) => {
       </Col>
       {/*This is the profile picture and employee information displayed*/}
       <Card className="mb-4">
-          <Card.Img variant="top" src="/logo512.png" height="250px" />
-          <Card.Body className="employee-display-info">
-            <Card.Title>{node.name}</Card.Title>
-            <Card.Text>{node.title}</Card.Text>
-            <Card.Text>{node.id}</Card.Text>
+        <Card.Img variant="top" src="/logo512.png" height="250px" />
+        <Card.Body className="employee-display-info">
+          <Card.Title>{node.firstName} {node.lastName}</Card.Title>
+          <Card.Text>{node.positionTitle}</Card.Text>
+          {/* <Card.Text>{node._id}</Card.Text> */}
           </Card.Body>
         </Card>
       {/*This is a card that contains an accordion.  Inside each accordion card, there is a nested form*/}

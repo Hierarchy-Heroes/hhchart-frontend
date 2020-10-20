@@ -41,7 +41,7 @@
 .chartPageSidebarVisible {
   background-color: rgb(11, 153, 11);
   margin-left: 0;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .placeholder-text{
@@ -79,6 +79,7 @@
   height: 50px;
   width: 50px;
   border-radius: 50%;
+  box-shadow: 0 2px 6px 0 #00000040;
 }
 
 

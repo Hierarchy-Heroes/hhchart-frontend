@@ -2,9 +2,17 @@ import React, {useState} from 'react';
 import './NavBar.css';
 import { Nav, Button, Navbar, Form, FormControl, DropdownButton, Dropdown, } from 'react-bootstrap';
 import AddEmployeeForm from '../add-employee-form/AddEmployeeForm';
-
+import { useHistory } from 'react-router-dom';
 
 const NavigationBar = (props) => {
+  const history = useHistory();
+
+  const logout = () => {
+    window.sessionStorage.removeItem('authToken');
+    window.sessionStorage.removeItem('companyName')
+    history.push('/login')
+  }
+
   const [addEmployeeVisible, setAddEmployeeVisible] = useState(false);
 
   const openAddEmployee = () => setAddEmployeeVisible(true);
@@ -48,13 +56,13 @@ const NavigationBar = (props) => {
           <Dropdown.Item className="dropdown-items" eventKey="4">Project</Dropdown.Item>
           <Dropdown.Item className="dropdown-items" eventKey="5">ID#</Dropdown.Item>
           <Dropdown.Divider />
-          <Dropdown.Item href="/login" className="dropdown-items" eventKey="6">Logout<i className="fas fa-sign-out-alt"></i></Dropdown.Item>
+          <Dropdown.Item href="/login" className="dropdown-items" eventKey="6" onClick={() => {logout()}}>Logout<i className="fas fa-sign-out-alt"></i></Dropdown.Item>
         </DropdownButton>
       </Navbar>
     );
   }
 
-  else{
+  else {
     return null;
   }
 
