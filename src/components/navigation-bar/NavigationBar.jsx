@@ -19,9 +19,6 @@ const NavigationBar = (props) => {
         <Navbar.Brand className="title" href="/">Hierarchy Heroes</Navbar.Brand>
         <Nav className="mr-auto">
         </Nav>
-        <Form inline>
-          <Button variant="outline-light" href="/">Log In</Button>
-        </Form>
       </Navbar>
     );
   }
