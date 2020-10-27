@@ -1,9 +1,17 @@
 import React from 'react';
 import './NavBar.css';
 import { Nav, Button, Navbar, Form, FormControl, DropdownButton, Dropdown, } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
 
 const NavigationBar = (props) => {
+  const history = useHistory();
+
+  const logout = () => {
+    window.sessionStorage.removeItem('authToken');
+    window.sessionStorage.removeItem('companyName')
+    history.push('/login')
+  }
 
   if(props.isLoggedIn === 'false'){
     return (
@@ -11,9 +19,6 @@ const NavigationBar = (props) => {
         <Navbar.Brand className="title" href="/">Hierarchy Heroes</Navbar.Brand>
         <Nav className="mr-auto">
         </Nav>
-        <Form inline>
-          <Button variant="outline-light" href="/">Log In</Button>
-        </Form>
       </Navbar>
     );
   }
@@ -35,13 +40,13 @@ const NavigationBar = (props) => {
           <Dropdown.Item className="dropdown-items" eventKey="4">Project</Dropdown.Item>
           <Dropdown.Item className="dropdown-items" eventKey="5">ID#</Dropdown.Item>
           <Dropdown.Divider />
-          <Dropdown.Item href="/login" className="dropdown-items" eventKey="6">Logout<i className="fas fa-sign-out-alt"></i></Dropdown.Item>
+          <Dropdown.Item href="/login" className="dropdown-items" eventKey="6" onClick={() => {logout()}}>Logout<i className="fas fa-sign-out-alt"></i></Dropdown.Item>
         </DropdownButton>
       </Navbar>
     );
   }
 
-  else{
+  else {
     return null;
   }
 
