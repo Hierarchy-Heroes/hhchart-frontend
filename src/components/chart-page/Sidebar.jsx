@@ -33,8 +33,8 @@ const Sidebar = ({ node, onClickClose }) => {
         },
         body: JSON.stringify(body)
       });
-      const text = 'response from backend placeholder' // change to await response.text();
-      if (true) { // change to 'response.ok' when endpoint is set up
+      const text = await response.text(); 
+      if (response.ok) { 
         console.log(text);
         // modify org chart accordingly
       } else {
