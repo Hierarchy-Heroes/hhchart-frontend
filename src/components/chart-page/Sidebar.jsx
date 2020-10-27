@@ -7,12 +7,18 @@ const Sidebar = ({ node, onClickClose }) => {
   const handleSubmitEdit = async (e) => {
     // add: onClickClose
     e.preventDefault();
+    const authToken = window.sessionStorage.getItem('authToken');
+    const companyName = window.sessionStorage.getItem('companyName');
     const form = e.currentTarget;
-    const url = 'edit employee endpoint placeholder';
+    const url = `http://localhost:3000/employees/${companyName}/update`;
     const body = {
-      'newName': form.editName.value,
-      'newTitle': form.editTitle.value,
-      'newEmail': form.editEmail.value
+      _id: node._id,
+      update: {
+        firstName: form.editName.value.split(" ")[0],
+        lastName: form.editName.value.split(" ")[1],
+        email: form.editEmail.value,
+        positionTitle: form.editTitle.value,
+      }
     }
     console.log(body.newName)
     console.log(body.newTitle)
@@ -21,6 +27,7 @@ const Sidebar = ({ node, onClickClose }) => {
       const respone = await fetch(url, {
         method: 'POST',
         headers: {
+          'auth-token': authToken,
           'Content-Type': 'application/json',
           'Content-Length': JSON.stringify(body).length
         },
@@ -49,7 +56,7 @@ const Sidebar = ({ node, onClickClose }) => {
     }
     console.log(body.newManager)
     try {
-      const respone = await fetch(url, {
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -57,8 +64,8 @@ const Sidebar = ({ node, onClickClose }) => {
         },
         body: JSON.stringify(body)
       });
-      const text = 'response from backend placeholder' // change to await response.text();
-      if (true) { // change to 'response.ok' when endpoint is set up
+      const text = await response.text();
+      if (response.ok) {
         console.log(text);
         // modify org chart accordingly
       } else {
@@ -73,23 +80,30 @@ const Sidebar = ({ node, onClickClose }) => {
   const handleSubmitDelete = async (e) => {
     // add: onClickClose
     e.preventDefault();
+    let conf = window.confirm(`Are you sure you want to remove ${node.firstName} ${node.lastName}?`)
+    if (!conf) {
+      return;
+    }
+    const authToken = window.sessionStorage.getItem('authToken');
+    const companyName = window.sessionStorage.getItem('companyName');
     const form = e.currentTarget;
-    const url = 'delete employee endpoint placeholder';
+    const url = `http://localhost:3000/employees/${companyName}/remove`;
     const body = {
-      'currManager': form.deleteManager.value
+      '_id': node._id,
     }
     console.log(body.newManager)
     try {
-      const respone = await fetch(url, {
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
+          'auth-token': authToken,
           'Content-Type': 'application/json',
           'Content-Length': JSON.stringify(body).length
         },
         body: JSON.stringify(body)
       });
-      const text = 'response from backend placeholder' // change to await response.text();
-      if (true) { // change to 'response.ok' when endpoint is set up
+      const text = await response.text();
+      if (response.ok) {
         console.log(text);
         // modify org chart accordingly
       } else {
@@ -135,15 +149,15 @@ const Sidebar = ({ node, onClickClose }) => {
                 <Form className="form-body" onSubmit={handleSubmitEdit}>
                   <Form.Group>
                     <Form.Label>Name</Form.Label>
-                    <Form.Control className="placeholder-text" type="text" placeholder="New Name" name="editName" />
+                    <Form.Control className="placeholder-text" type="text" placeholder="New Name" defaultValue={node.firstName + " " + node.lastName} name="editName" />
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Title</Form.Label>
-                    <Form.Control className="placeholder-text" type="text" placeholder="New Title" name="editTitle" />
+                    <Form.Control className="placeholder-text" type="text" placeholder="New Title" defaultValue={node.positionTitle} name="editTitle" />
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Email</Form.Label>
-                    <Form.Control className="placeholder-text" type="text" placeholder="New Email" name="editEmail" />
+                    <Form.Control className="placeholder-text" type="text" placeholder="New Email" defaultValue={node.email} name="editEmail" />
                   </Form.Group>
                   <Col className="text-center">
                     <Button id="request-btn" variant="none" className="mb" type="submit">Update</Button>
