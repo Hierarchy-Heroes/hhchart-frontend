@@ -1,9 +1,11 @@
 import React from 'react';
 import './LoginPage.css';
 import { Button, Form, } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
 
 export const LoginPage = (props) => {
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,12 +31,16 @@ export const LoginPage = (props) => {
         console.log(text);
         window.sessionStorage.setItem('authToken', text);
         window.sessionStorage.setItem('companyName', form.company.value.replace(/\s/g, ''));
+        history.push('/');
+        return true;
       } else {
         alert(text);
+        return false;
       }
     } catch (err) {
       console.error(err);
       console.log(JSON.stringify(body));
+      return false;
     }
   }
 
@@ -43,6 +49,7 @@ export const LoginPage = (props) => {
       <Form.Group className="mx-auto">
         <Form.Label>Company</Form.Label>
         <Form.Control as="select" name="company">
+          <option disabled selected value="">Select a company</option>
           <option>Cyclone Aviation</option>
           <option>Nightwell Enterprises</option>
           <option>Tiger Microsystems</option>
@@ -50,7 +57,7 @@ export const LoginPage = (props) => {
       </Form.Group>
       <Form.Group className="user mx-auto">
         <Form.Label>E-mail</Form.Label>
-        <Form.Control type="user" placeholder="Enter E-mail" name="email" />
+        <Form.Control type="email" placeholder="Enter e-mail" name="email" />
       </Form.Group>
       <Form.Group className="password mx-auto">
         <Form.Label>Password</Form.Label>
@@ -58,7 +65,7 @@ export const LoginPage = (props) => {
       </Form.Group>
 
       <div class="buttons">
-        <Button className="loginButtons" id="leftBtn" type="submit" variant="btn-outline-*">Log In</Button>
+        <Button className="loginButtons" id="leftBtn" type="submit">Log In</Button>
         <Button className="loginButtons" type="btn" variant="outline-primary-*">Forgot password?</Button>
       </div>
 
