@@ -24,7 +24,7 @@ const Sidebar = ({ node, onClickClose }) => {
     console.log(body.newTitle)
     console.log(body.newEmail)
     try {
-      const respone = await fetch(url, {
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           'auth-token': authToken,
