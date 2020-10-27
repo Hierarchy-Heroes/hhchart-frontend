@@ -7,7 +7,7 @@
 .chartPageSidebar {
   min-width: 20rem;
   max-width: 20rem;
-  min-height: 100%;
+  max-height: 100%;
   margin-left: -20rem;
   padding: 0.875rem 1.25rem;
   font-size: 1.2rem;
@@ -17,11 +17,29 @@
   transition: margin .25s ease-out;
 }
 
+#close-btn{
+  background-color: rgb(0, 130, 100);
+  font-size: 20px;
+  margin: 5px;
+  color: white;
+}
+
+#request-btn{
+  background-color: rgb(0, 131, 185);
+  color: white;
+  font-size: 14px;
+}
+
+.form-body{
+  font-size: 15px;
+}
+
 .chartPageContentWrapper {
   min-width: 100%;
 }
 
 .chartPageSidebarVisible {
+  background-color: rgb(11, 153, 11);
   margin-left: 0;
   overflow-y: auto;
 }
@@ -63,6 +81,7 @@
   border-radius: 50%;
   box-shadow: 0 2px 6px 0 #00000040;
 }
+
 
 /* @media (min-width: 768px) {
   .sidebar {
