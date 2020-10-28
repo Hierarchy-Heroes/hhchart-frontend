@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import OrgChart from './Chart';
 import { SearchBar } from '../search-bar/SearchBar';
 import Sidebar from './Sidebar';
-import { Button } from 'react-bootstrap';
+import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import './ChartPage.css';
 import { useHistory } from 'react-router-dom';
 
@@ -58,8 +58,10 @@ export const ChartPage = props => {
   // const [zoomMag, setZoomMag] = useState(1.0);
   let zoomMag = 1.0;
   const zoom = (mag) => {
-    zoomMag += mag;
-    const chart = document.getElementsByClassName('orgchart')[0];
+    if (zoomMag < 2 && mag > 0 || zoomMag > 0.2 && mag < 0) {
+      zoomMag += mag;
+    }
+    const chart = document.getElementsByClassName('orgchart')[0].children[0];
     chart.setAttribute('style', `transform: scale(${zoomMag})`);
   };
 
@@ -81,9 +83,21 @@ export const ChartPage = props => {
       />
       <OrgChart className="chartPageContentWrapper" datasource={treeData} onClickNode={onClickNode} />
       <ul className="fab-group">
-        <li><Button className="fab fab-small" variant="secondary" onClick={() => zoom(.1)}><i class="fas fa-plus"></i></Button></li>
-        <li><Button className="fab fab-small" variant="secondary" onClick={() => zoom(-.1)}><i class="fas fa-minus"></i></Button></li>
-        <li><Button className="fab" onClick={() => setSearchVisible(!searchVisibile)}><i class="fas fa-search"></i></Button></li>
+        <li>
+          <OverlayTrigger placement='left' overlay={<Tooltip>Zoom-In</Tooltip>}>
+            <Button className="fab fab-small" variant="secondary" onClick={() => zoom(.1)}><i class="fas fa-plus"></i></Button>
+          </OverlayTrigger>
+        </li>
+        <li>
+          <OverlayTrigger placement='left' overlay={<Tooltip>Zoom-Out</Tooltip>}>
+            <Button className="fab fab-small" variant="secondary" onClick={() => zoom(-.1)}><i class="fas fa-minus"></i></Button>
+          </OverlayTrigger>
+        </li>
+        <li>
+          <OverlayTrigger placement='left' overlay={<Tooltip>Search Organization</Tooltip>}>
+            <Button className="fab" onClick={() => setSearchVisible(!searchVisibile)}><i class="fas fa-search"></i></Button>
+          </OverlayTrigger>
+        </li>
       </ul>
     </div>
   )
