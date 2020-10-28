@@ -2001,16 +2001,6 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
 
-"@dabeng/react-orgchart@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@dabeng/react-orgchart/-/react-orgchart-1.0.0.tgz#03f8f7f51a683390cbe68d45233014e0750b9a7a"
-  integrity sha512-eyPwpHi+ftQ7CEs2DSxEhgHiXapO11RfDFTTRuVlDQBT93d5s9+T/4W4ffL1nAQfCDQzZgJuXcB1cSt7fWd3PQ==
-  dependencies:
-    html2canvas "^1.0.0-rc.5"
-    json-digger "^1.1.5"
-    jspdf "^1.5.3"
-    rxjs "^6.5.4"
-
 "@emotion/cache@^10.0.27":
   version "10.0.29"
   resolved "https://registry.yarnpkg.com/@emotion/cache/-/cache-10.0.29.tgz#87e7e64f412c060102d589fe7c6dc042e6f9d1e0"
@@ -9795,6 +9785,18 @@ jest@24.9.0:
     import-local "^2.0.0"
     jest-cli "^24.9.0"
 
+jquery-mockjax@^2.5.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/jquery-mockjax/-/jquery-mockjax-2.6.0.tgz#e96737d7c312965f2514b97ce9662db36b7d5ef4"
+  integrity sha512-KNlIYbC5m+dr6t5ZQJSW+9cZf6wMiAc2XiJXAywBjvxnfRWTF+qaZLLk2mTc8NGXbPE0RQsfYu+mbS83ScALhg==
+  dependencies:
+    jquery ">=1.5.2"
+
+jquery@>=1.5.2, jquery@^3.4.1, jquery@^3.5.1:
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.5.1.tgz#d7b4d08e1bfdb86ad2f1a3d039ea17304717abb5"
+  integrity sha512-XwIBPqcMn57FxfT+Go5pzySnm4KWkT1Tv7gjrpT1srtf8Weynl6R273VJ5GjkRb51IzMp5nbaPjJXMWeju2MKg==
+
 js-string-escape@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/js-string-escape/-/js-string-escape-1.0.1.tgz#e2625badbc0d67c7533e9edc1068c587ae4137ef"
@@ -9919,11 +9921,6 @@ jsesc@~0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-0.5.0.tgz#e7dee66e35d6fc16f710fe91d5cf69f70f08911d"
   integrity sha1-597mbjXW/Bb3EP6R1c9p9w8IkR0=
-
-json-digger@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/json-digger/-/json-digger-1.1.5.tgz#bc9b58d14268597cbf9347786551e993dcd9729e"
-  integrity sha512-mib6qZP0x4EJnbKzR6EcIn8REWuQrrPyQLUx5RtDeq74e+ZUrU47L9ODcUp0mALPyhvda99CkUO2KPkYS23XdA==
 
 json-parse-better-errors@^1.0.1, json-parse-better-errors@^1.0.2:
   version "1.0.2"
@@ -11214,6 +11211,16 @@ optionator@^0.8.1, optionator@^0.8.3:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
     word-wrap "~1.2.3"
+
+orgchart@^2.1.10:
+  version "2.1.10"
+  resolved "https://registry.yarnpkg.com/orgchart/-/orgchart-2.1.10.tgz#0747452c3d368e21dcea1de2adc082eb75a56579"
+  integrity sha512-jgiajUSq07XScAgHPwQeGJKPdDsHfr/ENbKcsEUyCjNOPDmw6XeO7fJ6GMaJ93jxs9P0sJktMUJr+e3gjorZmQ==
+  dependencies:
+    html2canvas "^1.0.0-rc.5"
+    jquery "^3.4.1"
+    jquery-mockjax "^2.5.0"
+    jspdf "^1.5.3"
 
 original@^1.0.0:
   version "1.0.2"
@@ -13631,13 +13638,6 @@ rxjs@^6.5.3:
   version "6.5.4"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.4.tgz#e0777fe0d184cec7872df147f303572d414e211c"
   integrity sha512-naMQXcgEo3csAEGvw/NydRA0fuS2nDZJiw1YUWFKU7aPPAPGZEsD4Iimit96qwCieH6y614MCLYwdkrWx7z/7Q==
-  dependencies:
-    tslib "^1.9.0"
-
-rxjs@^6.5.4:
-  version "6.6.3"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.6.3.tgz#8ca84635c4daa900c0d3967a6ee7ac60271ee552"
-  integrity sha512-trsQc+xYYXZ3urjOiJOuCOa5N3jAZ3eiSpQB5hIT8zGlL2QfnHLJ2r7GMkBGuIausdJN1OneaI6gQlsqNHHmZQ==
   dependencies:
     tslib "^1.9.0"
 
