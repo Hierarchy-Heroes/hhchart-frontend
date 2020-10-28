@@ -4,6 +4,7 @@ import { SearchBar } from '../search-bar/SearchBar';
 import Sidebar from './Sidebar';
 import { Button } from 'react-bootstrap';
 import './ChartPage.css';
+import { useHistory } from 'react-router-dom';
 
 export const ChartPage = props => {
   const [treeData, setTreeData] = useState({});
@@ -11,6 +12,7 @@ export const ChartPage = props => {
   const [currentNode, setCurrentNode] = useState(null);
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [searchVisibile, setSearchVisible] = useState(false);
+  const history = useHistory();
 
   const getCollection = async (collection) => {
     const authToken = window.sessionStorage.getItem('authToken');
@@ -33,6 +35,8 @@ export const ChartPage = props => {
           case 'flat':
             setFlatData(json);
         }
+      } else if (response.status === 400) {
+        history.push('/login');
       }
     } catch (err) {
       console.log(err);
@@ -51,6 +55,14 @@ export const ChartPage = props => {
 
   const onClickClose = () => setSidebarVisible(false);
 
+  // const [zoomMag, setZoomMag] = useState(1.0);
+  let zoomMag = 1.0;
+  const zoom = (mag) => {
+    zoomMag += mag;
+    const chart = document.getElementsByClassName('orgchart')[0];
+    chart.setAttribute('style', `transform: scale(${zoomMag})`);
+  };
+
   return (
     <div className="d-flex flex-row chartPage">
       <div className={`bg-light border-right chartPageSidebar ${sidebarVisible ? "chartPageSidebarVisible" : ""}`}>
@@ -68,7 +80,11 @@ export const ChartPage = props => {
         }}
       />
       <OrgChart className="chartPageContentWrapper" datasource={treeData} onClickNode={onClickNode} />
-      <Button className="fab" onClick={() => setSearchVisible(!searchVisibile)}><i class="fas fa-search"></i></Button>
+      <ul className="fab-group">
+        <li><Button className="fab fab-small" variant="secondary" onClick={() => zoom(.1)}><i class="fas fa-plus"></i></Button></li>
+        <li><Button className="fab fab-small" variant="secondary" onClick={() => zoom(-.1)}><i class="fas fa-minus"></i></Button></li>
+        <li><Button className="fab" onClick={() => setSearchVisible(!searchVisibile)}><i class="fas fa-search"></i></Button></li>
+      </ul>
     </div>
   )
 };
