@@ -8,35 +8,35 @@ export default {
 };
 
 const ds = {
-  id: "n1",
+  employeeId: "n1",
   firstName: "Jamiya Alvarez",
   positionTitle: "Chief Executive Officer",
   children: [
-    { id: "n2", firstName: "Lewis Watts", positionTitle: "Chief Operations Officer" },
+    { employeeId: "n2", firstName: "Lewis Watts", positionTitle: "Chief Operations Officer" },
     {
-      id: "n3",
+      employeeId: "n3",
       firstName: "Bridget Fyre",
       positionTitle: "Chief Technology Officer",
       children: [
-        { id: "n4", firstName: "Tie Hua", positionTitle: "Senior Hardware Engineer" },
+        { employeeId: "n4", firstName: "Tie Hua", positionTitle: "Senior Hardware Engineer" },
         {
-          id: "n5",
+          employeeId: "n5",
           firstName: "Kaeden Cameron",
           positionTitle: "Senior Software Engineer",
           children: [
-            { id: "n6", firstName: "Anabella Robbins", positionTitle: "Software Engineer I" },
-            { id: "n7", firstName: "Xiang Xiang", positionTitle: "Software Engineer I" }
+            { employeeId: "n6", firstName: "Anabella Robbins", positionTitle: "Software Engineer I" },
+            { employeeId: "n7", firstName: "Xiang Xiang", positionTitle: "Software Engineer I" }
           ]
         },
-        { id: "n8", firstName: "Dereon Patel", positionTitle: "Software Engineer II" }
+        { employeeId: "n8", firstName: "Dereon Patel", positionTitle: "Software Engineer II" }
       ]
     },
-    { id: "n9", firstName: "Shirley Knight", positionTitle: "Head Council" },
+    { employeeId: "n9", firstName: "Shirley Knight", positionTitle: "Head Council" },
     {
-      id: "n10",
+      employeeId: "n10",
       firstName: "Carissa Rhodes",
       positionTitle: "Chief Marketing Officer",
-      children: [{ id: "n11", firstName: "Raiden Mueller", positionTitle: "Marketing Director" }]
+      children: [{ employeeId: "n11", firstName: "Raiden Mueller", positionTitle: "Marketing Director" }]
     }
   ]
 };

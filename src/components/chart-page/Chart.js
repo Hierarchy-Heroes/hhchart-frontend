@@ -35,18 +35,19 @@ const OrgChart = props => {
       $node.find(".content").remove();
 
       // Add a react root whose id contains the node id
-      $node.append(`<div id="react-root-${data.id}"></div>`);
+      $node.append(`<div id="react-root-${data.employeeId}"></div>`);
       $node.addClass("containerContainer");
 
       // Render a chart node to the new react root
-      ReactDOM.render(React.createElement(ChartNode, {nodeData: data, onClickNode: props.onClickNode}), $node.find(`#react-root-${data.id}`).get(0));
+      ReactDOM.render(React.createElement(ChartNode, {nodeData: data, onClickNode: props.onClickNode}), $node.find(`#react-root-${data.employeeId}`).get(0));
 
       if (props.centerOnClick) {
         $node.on('click', function(event) {
           // If none of the buttons are hovered over, the node itself is being clicked
-          if (!$(event.target).is('.edge, .toggleBtn')) {
+          if (!$(event.target).is('.edge, .toggleBtn') && containerRef) {
             var $this = $(this);
-            var $chart = $this.closest('.orgchart');
+            console.log($this);
+            var $chart = $(containerRef.current).find(".orgchart");
             var newX = window.parseInt(($chart.outerWidth(true) / 2) - ($this.offset().left - $chart.offset().left) - ($this.outerWidth(true) / 2));
             var newY = window.parseInt(($chart.outerHeight(true) / 2) - ($this.offset().top - $chart.offset().top) - ($this.outerHeight(true) / 2));
             $chart.css('transform', 'matrix(1, 0, 0, 1, ' + newX + ', ' + newY + ')');

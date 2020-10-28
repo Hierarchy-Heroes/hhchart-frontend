@@ -16,8 +16,8 @@ const ChartNode = ({ nodeData, onClickNode }) => {
       </svg>
       {/* <img className='portrait' src='https://www.materialui.co/materialIcons/social/person_black_144x144.png' /> */}
       <div className='content-container'>
-        <div className='fullname'>{nodeData.firstName} {nodeData.lastName}</div>
-        <div className='title'>{nodeData.positionTitle}</div>
+        <div className='nodeFullName'>{nodeData.firstName} {nodeData.lastName}</div>
+        <div className='nodeTitle'>{nodeData.positionTitle}</div>
       </div>
     </div>
   )
