@@ -1,28 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useEffect } from 'react';
 
 import { Button, Card, Col, Accordion, Form } from "react-bootstrap";
 
 const Sidebar = ({ node, onClickClose }) => {
+  const [nodeState, setNodeState] = useState(null);
+  const setNodeStateParams = (params) => {
+    setNodeState({
+      ...nodeState,
+      ...params,
+    })
+  }
+
+  useEffect(() => {
+    setNodeState(node);
+  }, [node])
 
   const handleSubmitEdit = async (e) => {
     // add: onClickClose
     e.preventDefault();
     const authToken = window.sessionStorage.getItem('authToken');
     const companyName = window.sessionStorage.getItem('companyName');
-    const form = e.currentTarget;
+    // const form = e.currentTarget;
     const url = `http://localhost:3000/employees/${companyName}/update`;
     const body = {
       _id: node._id,
       update: {
-        firstName: form.editName.value.split(" ")[0],
-        lastName: form.editName.value.split(" ")[1],
-        email: form.editEmail.value,
-        positionTitle: form.editTitle.value,
+        firstName: nodeState.firstName,
+        lastName: nodeState.lastName,
+        email: nodeState.email,
+        positionTitle: nodeState.positionTitle,
       }
     }
-    console.log(body.newName)
-    console.log(body.newTitle)
-    console.log(body.newEmail)
+    console.log(body)
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -33,8 +43,8 @@ const Sidebar = ({ node, onClickClose }) => {
         },
         body: JSON.stringify(body)
       });
-      const text = await response.text(); 
-      if (response.ok) { 
+      const text = await response.text();
+      if (response.ok) {
         console.log(text);
         // modify org chart accordingly
       } else {
@@ -115,7 +125,7 @@ const Sidebar = ({ node, onClickClose }) => {
     }
   }
 
-  return node && (
+  return (nodeState && node) && (
     <div className="side-bar">
       {/*This is the close button*/}
       <Col className="text-center">
@@ -132,8 +142,8 @@ const Sidebar = ({ node, onClickClose }) => {
           <Card.Title>{node.firstName} {node.lastName}</Card.Title>
           <Card.Text>{node.positionTitle}</Card.Text>
           {/* <Card.Text>{node._id}</Card.Text> */}
-          </Card.Body>
-        </Card>
+        </Card.Body>
+      </Card>
       {/*This is a card that contains an accordion.  Inside each accordion card, there is a nested form*/}
       <Card>
         <Accordion>
@@ -149,15 +159,24 @@ const Sidebar = ({ node, onClickClose }) => {
                 <Form className="form-body" onSubmit={handleSubmitEdit}>
                   <Form.Group>
                     <Form.Label>Name</Form.Label>
-                    <Form.Control className="placeholder-text" type="text" placeholder="New Name" defaultValue={node.firstName + " " + node.lastName} name="editName" />
+                    <Form.Control name="editName" className="placeholder-text" type="text" placeholder="New Name"
+                      value={nodeState.firstName + " " + nodeState.lastName}
+                      onChange={(e) => setNodeStateParams({ firstName: e.target.value.split(' ')[0], lastName: e.target.value.split(' ')[1] })}
+                    />
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Title</Form.Label>
-                    <Form.Control className="placeholder-text" type="text" placeholder="New Title" defaultValue={node.positionTitle} name="editTitle" />
+                    <Form.Control name="editTitle" className="placeholder-text" type="text" placeholder="New Title"
+                      value={nodeState.positionTitle}
+                      onChange={(e) => setNodeStateParams({ positionTitle: e.target.value })}
+                    />
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Email</Form.Label>
-                    <Form.Control className="placeholder-text" type="text" placeholder="New Email" defaultValue={node.email} name="editEmail" />
+                    <Form.Control name="editEmail" className="placeholder-text" type="text" placeholder="New Email"
+                      value={nodeState.email}
+                      onChange={(e) => setNodeStateParams({ email: e.target.value })}
+                    />
                   </Form.Group>
                   <Col className="text-center">
                     <Button id="request-btn" variant="none" className="mb" type="submit">Update</Button>
