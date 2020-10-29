@@ -179,7 +179,7 @@ const Sidebar = ({ node, onClickClose }) => {
                     />
                   </Form.Group>
                   <Col className="text-center">
-                    <Button id="request-btn" variant="none" className="mb" type="submit">Update</Button>
+                    <Button variant="primary" className="mb" type="submit">Update</Button>
                   </Col>
                 </Form>
               </Card.Body>
@@ -201,7 +201,7 @@ const Sidebar = ({ node, onClickClose }) => {
                     <Form.Control className="placeholder-text" type="text" placeholder="New Manager" name="moveManager" />
                   </Form.Group>
                   <Col className="text-center">
-                    <Button id="request-btn" variant="none" className="mb" type="submit">Request Move</Button>
+                    <Button variant="primary" className="mb" type="submit">Request Move</Button>
                   </Col>
                 </Form>
               </Card.Body>
@@ -222,7 +222,7 @@ const Sidebar = ({ node, onClickClose }) => {
                     <Form.Control className="placeholder-text" type="text" placeholder="Manager" name="deleteManager" />
                   </Form.Group>
                   <Col className="text-center">
-                    <Button id="request-btn" variant="none" className="mb" type="submit">Request Deletion</Button>
+                    <Button variant="primary" className="mb" type="submit">Request Deletion</Button>
                   </Col>
                 </Form>
               </Card.Body>
