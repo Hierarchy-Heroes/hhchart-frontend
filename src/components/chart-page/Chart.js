@@ -67,7 +67,7 @@ const OrgChart = props => {
   }, [options]);
 
   return (
-    <div className="containerClass" ref={containerRef} />
+    <div className="chartContainer" ref={containerRef} />
   );
 };
 
