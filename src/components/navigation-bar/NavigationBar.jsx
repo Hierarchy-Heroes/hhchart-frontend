@@ -36,10 +36,6 @@ const NavigationBar = (props) => {
         <Navbar.Brand className="title" href="/">Hierarchy Heroes</Navbar.Brand>
         <Nav className="mr-auto">
         </Nav>
-        <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-light" className="mr-sm-2">Search</Button>
-        </Form>
         <div>
           <AddEmployeeForm visible={addEmployeeVisible} onClickClose={onClickClose}></AddEmployeeForm>
           <Button variant="outline-light" className="mr-sm-2" onClick={onClickOpen}>Add Employee</Button>
