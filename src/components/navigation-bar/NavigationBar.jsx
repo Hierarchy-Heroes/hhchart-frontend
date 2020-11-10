@@ -46,7 +46,7 @@ const NavigationBar = (props) => {
           <Dropdown.Divider />
           <Dropdown.Item href="/login" className="dropdown-items" eventKey="6" onClick={() => {logout()}}>Logout<i className="fas fa-sign-out-alt"></i></Dropdown.Item>
         </DropdownButton>
-        
+
         <DropdownButton className="settings-btn" noCaret varient="outline-light" title = 
           {<div className="user-icon">
           <i class="fas fa-cog" id="profile-icon"></i>
@@ -60,7 +60,9 @@ const NavigationBar = (props) => {
           <Modal.Header closeButton>
             <Modal.Title>Import Tree</Modal.Title>
           </Modal.Header>
-        <Modal.Body>Placeholder for file upload form</Modal.Body>
+        <Modal.Body>
+          <Form.File id="uploadedTree"></Form.File>
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>Close </Button>
           <Button variant="primary" onClick={handleClose}>Upload</Button>
