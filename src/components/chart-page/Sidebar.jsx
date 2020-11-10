@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 import { Button, Card, Col, Accordion, Form } from "react-bootstrap";
 
-const Sidebar = ({ node, onClickClose }) => {
+const Sidebar = ({ node, onClickClose, isManager }) => {
   const [nodeState, setNodeState] = useState(null);
   const setNodeStateParams = (params) => {
     setNodeState({
@@ -145,7 +145,7 @@ const Sidebar = ({ node, onClickClose }) => {
         </Card.Body>
       </Card>
       {/*This is a card that contains an accordion.  Inside each accordion card, there is a nested form*/}
-      <Card>
+      {isManager && <Card>
         <Accordion>
           {/*This is the 'edit employee' section button*/}
           <Card>
@@ -229,7 +229,7 @@ const Sidebar = ({ node, onClickClose }) => {
             </Accordion.Collapse>
           </Card>
         </Accordion>
-      </Card>
+      </Card>}
     </div>
   );
 };

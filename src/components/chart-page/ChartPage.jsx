@@ -32,6 +32,7 @@ export const ChartPage = props => {
             setTreeData(json[0]);
             break;
           case 'flat':
+            console.log(json);
             setFlatData(json);
         }
       } else if (response.status === 400) {
@@ -40,6 +41,21 @@ export const ChartPage = props => {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  const isManager = (user, employee) => {
+    if (user === null || employee === null) return false;
+    if (user.employeeId === employee.employeeId) return true;
+    let currId = employee.managerId;
+    while (currId > 0) {
+      // const managerIndex = 
+      console.log(currId);
+      if (user.employeeId === currId) {
+        return true;
+      }
+      currId = flatData[currId - 1].managerId;
+    }
+    return false;
   }
 
   useEffect(() => {
@@ -67,7 +83,7 @@ export const ChartPage = props => {
   return (
     <div className="d-flex flex-row chartPage">
       <div className={`bg-light border-right chartPageSidebar ${sidebarVisible ? "chartPageSidebarVisible" : ""}`}>
-        <Sidebar node={currentNode} onClickClose={onClickClose}></Sidebar>
+        <Sidebar node={currentNode} onClickClose={onClickClose} isManager={isManager(props.currentUser, currentNode)}></Sidebar>
       </div>
       <SearchBar
         data={flatData}
