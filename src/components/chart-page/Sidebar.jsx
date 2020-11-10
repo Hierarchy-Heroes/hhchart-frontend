@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 
-import { Button, Card, Col, Accordion, Form } from "react-bootstrap";
+import { Button, Card, Col, Accordion, Form, ListGroup, ListGroupItem } from "react-bootstrap";
 
 const Sidebar = ({ node, onClickClose }) => {
   const [nodeState, setNodeState] = useState(null);
@@ -15,6 +15,20 @@ const Sidebar = ({ node, onClickClose }) => {
   useEffect(() => {
     setNodeState(node);
   }, [node])
+
+  const handleSubmitImage = async (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const authToken = window.sessionStorage.getItem('authToken');
+    const url = 'http://localhost:3000/employees/upload-image';
+    const body = {
+      _id: node._id,
+      // not sure about this one
+      image: form.employeeImage.value,
+    };
+    console.log(body);
+    console.log(form.employeeImage);
+  }
 
   const handleSubmitEdit = async (e) => {
     // add: onClickClose
@@ -137,7 +151,7 @@ const Sidebar = ({ node, onClickClose }) => {
       </Col>
       {/*This is the profile picture and employee information displayed*/}
       <Card className="mb-4">
-        <Card.Img variant="top" src="/logo512.png" height="250px" />
+        <Card.Img className="employee-display-image" variant="top" src={nodeState.img && nodeState.img.buffer ? `data:image/png;base64${btoa(nodeState.img.buffer.data)}` : "https://upload.wikimedia.org/wikipedia/commons/7/7c/User_font_awesome.svg"} height="250px" />
         <Card.Body className="employee-display-info">
           <Card.Title>{node.firstName} {node.lastName}</Card.Title>
           <Card.Text>{node.positionTitle}</Card.Text>
@@ -155,34 +169,47 @@ const Sidebar = ({ node, onClickClose }) => {
               </Accordion.Toggle>
             </Card.Header>
             <Accordion.Collapse eventKey="0">
-              <Card.Body>
-                <Form className="form-body" onSubmit={handleSubmitEdit}>
-                  <Form.Group>
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control name="editName" className="placeholder-text" type="text" placeholder="New Name"
-                      value={nodeState.firstName + " " + nodeState.lastName}
-                      onChange={(e) => setNodeStateParams({ firstName: e.target.value.split(' ')[0], lastName: e.target.value.split(' ')[1] })}
-                    />
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label>Title</Form.Label>
-                    <Form.Control name="editTitle" className="placeholder-text" type="text" placeholder="New Title"
-                      value={nodeState.positionTitle}
-                      onChange={(e) => setNodeStateParams({ positionTitle: e.target.value })}
-                    />
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control name="editEmail" className="placeholder-text" type="text" placeholder="New Email"
-                      value={nodeState.email}
-                      onChange={(e) => setNodeStateParams({ email: e.target.value })}
-                    />
-                  </Form.Group>
-                  <Col className="text-center">
-                    <Button variant="primary" className="mb" type="submit">Update</Button>
-                  </Col>
-                </Form>
-              </Card.Body>
+              <ListGroup variant="flush">
+                <ListGroupItem>
+                  <Form className="form-body" encType="multipart/form-data" onSubmit={handleSubmitImage}>
+                    <Form.Group>
+                      <Form.Label>Upload Image</Form.Label>
+                      <Form.File name="employeeImage" accept="image/png" style={{ margin: "15px 0" }} required/>
+                    </Form.Group>
+                    <Col className="text-center">
+                      <Button variant="primary" className="mb" type="submit">Upload</Button>
+                    </Col>
+                  </Form>
+                </ListGroupItem>
+                <ListGroupItem>
+                  <Form className="form-body" onSubmit={handleSubmitEdit}>
+                    <Form.Group>
+                      <Form.Label>Name</Form.Label>
+                      <Form.Control name="editName" className="placeholder-text" type="text" placeholder="New Name"
+                        value={nodeState.firstName + " " + nodeState.lastName}
+                        onChange={(e) => setNodeStateParams({ firstName: e.target.value.split(' ')[0], lastName: e.target.value.split(' ')[1] })}
+                      />
+                    </Form.Group>
+                    <Form.Group>
+                      <Form.Label>Title</Form.Label>
+                      <Form.Control name="editTitle" className="placeholder-text" type="text" placeholder="New Title"
+                        value={nodeState.positionTitle}
+                        onChange={(e) => setNodeStateParams({ positionTitle: e.target.value })}
+                      />
+                    </Form.Group>
+                    <Form.Group>
+                      <Form.Label>Email</Form.Label>
+                      <Form.Control name="editEmail" className="placeholder-text" type="text" placeholder="New Email"
+                        value={nodeState.email}
+                        onChange={(e) => setNodeStateParams({ email: e.target.value })}
+                      />
+                    </Form.Group>
+                    <Col className="text-center">
+                      <Button variant="primary" className="mb" type="submit">Update</Button>
+                    </Col>
+                  </Form>
+                </ListGroupItem>
+              </ListGroup>
             </Accordion.Collapse>
           </Card>
           {/*This is the 'move employee' section*/}

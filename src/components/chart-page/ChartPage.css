@@ -52,6 +52,13 @@
   text-align: center;
 }
 
+.employee-display-image{
+  /* width: 100%;
+  height: 100%; */
+  border-radius: 50%;
+  margin: 10px 0;
+}
+
 .employee-display-info{
   text-align: center;
 }
