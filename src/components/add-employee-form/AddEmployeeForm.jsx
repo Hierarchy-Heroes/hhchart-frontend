@@ -13,7 +13,7 @@ const AddEmployeeForm = ({ visible, onClickClose }) => {
     const form = e.currentTarget;
     const authToken = window.sessionStorage.getItem('authToken');
     const companyName = window.sessionStorage.getItem('companyName');
-    const url = `http://localhost:3000/employees/${companyName}/add`;
+    const url = `http://localhost:3000/employees/add`;
     var companyId = 0;
     switch (companyName) {
       case 'CycloneAviation':
@@ -36,8 +36,8 @@ const AddEmployeeForm = ({ visible, onClickClose }) => {
       'positionTitle': form.positionTitle.value, //OPTIONAL
       'companyName': companyName,
       'isManager': isManager,
-      'employeeId': 99999, //implement
-      'managerId': 2, //implement
+      'employeeId': form.employeeId.value, //implement
+      'managerId': form.employeeId.value, //implement
       'email': form.email.value,
       'startDate': form.startDate.value //OPTIONAL
     }
@@ -99,14 +99,14 @@ const AddEmployeeForm = ({ visible, onClickClose }) => {
             <Form.Label>Start Date</Form.Label>
             <Form.Control type="text" placeholder="MM/DD/YYYY" name="startDate" />
           </Form.Group>
-          {/* <Form.Group controlId="formAddEmployeeId">
+          <Form.Group controlId="formAddEmployeeId">
             <Form.Label>Employee ID</Form.Label>
             <Form.Control type="text" placeholder="Enter employee id" name="employeeId" />
           </Form.Group>
           <Form.Group controlId="formAddManagerId">
             <Form.Label>Manager ID</Form.Label>
             <Form.Control type="text" placeholder="Enter manager id" name="managerId" />
-          </Form.Group> */}
+          </Form.Group>
           <Form.Group controlId="formAddIsManager">
             <Form.Check type="checkbox" label="Manager" onChange={handleManagerCheck} />
           </Form.Group>
