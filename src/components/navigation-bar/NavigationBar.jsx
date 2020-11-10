@@ -45,42 +45,6 @@ const NavigationBar = (props) => {
     }
   }
 
-
-
-  //state management for the employee's info, and if the get request has already been complete.
-  const [employeeInfo, setEmployeeInfo] = useState(null);
-  const [requestComplete, setRequestComplete] = useState(false);
-
-  //GET request for the currently logged-in employee's information
-  const getEmployeeInfo = async () => {
-    if(!requestComplete){
-      const authToken = window.sessionStorage.getItem('authToken');
-      //const companyName = window.sessionStorage.getItem('companyName');
-      const url = `http://localhost:3000/employees/usr`;
-      try {
-        const response = await fetch(url, {
-          method: 'GET',
-          headers: {
-            'auth-token': authToken,
-          },
-        });
-        if (response.ok) {
-          console.log("made it here")
-          const json = await response.json();
-          props.setCurrentUser(json);
-        }
-        else{
-          console.log("error");
-        }
-      } catch (err) {
-        console.error(err);
-      }
-      setRequestComplete(true);
-    }
-  }
-
-
-
   const logout = () => {
     window.sessionStorage.removeItem('authToken');
     window.sessionStorage.removeItem('companyName')
