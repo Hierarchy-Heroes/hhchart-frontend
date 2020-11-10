@@ -17,6 +17,14 @@
   margin: 12px;
 }
 
+.nodeGreenColor {
+  background-color: #008264;
+}
+
+.nodeOrangeColor {
+  background-color: #F9AA33;
+}
+
 .portrait {
   position: relative;
   top: -12px;
