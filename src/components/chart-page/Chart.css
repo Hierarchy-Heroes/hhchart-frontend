@@ -16,11 +16,23 @@
 }
 
 .orgchart > ul > li > ul li::before {
-  border-top-color: #000000;
+  border-top-color: black;
 }
 
 .orgchart > ul > li > ul li .oc-node::before,
 .orgchart ul li .oc-node:not(:only-child)::after {
-  background-color: #000000;
+  background-color: black;
+}
+
+.orgchart .verticalNodes ul > li::before, .orgchart .verticalNodes ul > li::after, .orgchart .verticalNodes > td::before {
+  border-color: black;
+}
+
+.leftLine, .rightLine, .topLine {
+  border-color: black !important;
+}
+
+.downLine {
+  background-color: black !important;
 }
 

@@ -1,4 +1,4 @@
-.container {
+.node-container {
   display: flex;
   flex-direction: row;
   border-radius: 4px;
@@ -14,6 +14,7 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+  margin: 12px;
 }
 
 .portrait {
@@ -33,7 +34,7 @@
   /* height: 33px; */
 }
 
-.oc-node .fullname {
+.oc-node .nodeFullName {
   margin: 4px 0;
   line-height: 12px;
   height: 20px;
@@ -45,7 +46,7 @@
   padding: 2px;
 }
 
-.oc-node .title {
+.oc-node .nodeTitle {
   line-height: 12px;
   height: 20px;
   font-size: inherit;
