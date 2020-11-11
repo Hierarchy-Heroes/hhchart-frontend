@@ -17,6 +17,18 @@
   margin: 12px;
 }
 
+.nodeGreenColor {
+  background-color: #008264;
+}
+
+.nodeOrangeColor {
+  background-color: #F9AA33;
+}
+
+.nodeSelectedColor {
+  background-color: #7B9EA8;
+}
+
 .portrait {
   position: relative;
   top: -12px;
