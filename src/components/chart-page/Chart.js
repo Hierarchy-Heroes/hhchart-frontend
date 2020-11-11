@@ -15,31 +15,48 @@ import './Chart.css';
     datasource,
   }
   */
-const OrgChart = props => {
+const OrgChartNonMemoized = props => {
   const containerRef = useRef(null);
 
   const options = {
     data: props.datasource,
     chartClass: "chart",
-    pan: true,
     verticalLevel: 3,
     visibleLevel: 4,
     nodeTitle: null,
     nodeContent: null,
-    // zoom: true,
-    // zoominLimit: 1,
-    // zoomoutLimit: 0.5,
-    createNode: ($node, data) => {
-      // Remove orgchart default node
-      $node.find(".title").remove();
-      $node.find(".content").remove();
+    nodeTemplate: _ => "<div></div>", // Preempt orgchart's node rendering
+    initCompleted: $chart => {
+      let _scale = 1.0;
+      let _position = {x: 0, y: 0};
 
+      const update = () => $chart.css('transform', `matrix(${_scale}, 0, 0, ${_scale}, ${_position.x}, ${_position.y})`);
+
+      const controllerObject = {
+        pan: position => {
+          _position = position;
+          update();
+        },
+        zoom: scale => {
+          _scale = scale;
+          update();
+        },
+        setSelectedEmployeeId: id => {
+          // TODO
+        }
+      };
+
+      props.onChartRender(controllerObject);
+    },
+    createNode: ($node, data) => {
       // Add a react root whose id contains the node id
       $node.append(`<div id="react-root-${data.employeeId}"></div>`);
       $node.addClass("containerContainer");
 
       // Render a chart node to the new react root
-      ReactDOM.render(React.createElement(ChartNode, {nodeData: data, onClickNode: props.onClickNode}), $node.find(`#react-root-${data.employeeId}`).get(0));
+      ReactDOM.render(React.createElement(ChartNode, {nodeData: data, 
+        onClickNode: props.onClickNode}), 
+        $node.find(`#react-root-${data.employeeId}`).get(0));
 
       if (props.centerOnClick) {
         $node.on('click', function(event) {
@@ -70,5 +87,9 @@ const OrgChart = props => {
     <div className="chartContainer" ref={containerRef} />
   );
 };
+
+const OrgChart = React.memo(OrgChartNonMemoized, (prevProps, nextProps) => {
+  return prevProps.datasource === nextProps.datasource;
+});
 
 export default OrgChart;

@@ -12,6 +12,11 @@ export const ChartPage = props => {
   const [currentNode, setCurrentNode] = useState(null);
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [searchVisibile, setSearchVisible] = useState(false);
+  const [zoomMag, setZoomMag] = useState(1.0);
+  const [chartController, setChartController] = useState(null);
+  const [mouseDown, setMouseDown] = useState(false);
+  const [chartPosition, setChartPosition] = useState({x: 0, y: 0});
+
   const history = useHistory();
 
   const getCollection = async (collection) => {
@@ -54,13 +59,23 @@ export const ChartPage = props => {
 
   const onClickClose = () => setSidebarVisible(false);
 
-  // const [zoomMag, setZoomMag] = useState(1.0);
-  let zoomMag = 1.0;
+  const onMouseMove = event => {
+    if (mouseDown) {
+      setChartPosition({
+        x: chartPosition.x + event.nativeEvent.movementX, 
+        y: chartPosition.y + event.nativeEvent.movementY
+      });
+    }
+  }
+
   const zoom = (mag) => {
-    zoomMag += mag;
-    const chart = document.getElementsByClassName('orgchart')[0];
-    chart.setAttribute('style', `transform: scale(${zoomMag})`);
+    setZoomMag(zoomMag + mag);
   };
+
+  if (chartController) {
+    chartController.zoom(zoomMag);
+    chartController.pan(chartPosition);
+  }
 
   return (
     <div className="d-flex flex-row chartPage">
@@ -75,10 +90,21 @@ export const ChartPage = props => {
           setCurrentNode(result);
           setSidebarVisible(!!result);
           setSearchVisible(false);
-          // document.getElementById(result.id).classList.add('selected');
         }}
       />
-      <OrgChart className="chartPageContentWrapper" datasource={treeData} onClickNode={onClickNode} />
+      <div 
+        onMouseDown={() => setMouseDown(true)}
+        onMouseUp={() => setMouseDown(false)}
+        onMouseMove={onMouseMove}
+      >
+        <OrgChart 
+          className="chartPageContentWrapper" 
+          datasource={treeData} 
+          onClickNode={onClickNode} 
+          onChartRender={setChartController} 
+        />
+      </div>
+      
       <ul className="fab-group">
         <li><Button className="fab fab-small" variant="secondary" onClick={() => zoom(.1)}><i class="fas fa-plus"></i></Button></li>
         <li><Button className="fab fab-small" variant="secondary" onClick={() => zoom(-.1)}><i class="fas fa-minus"></i></Button></li>
