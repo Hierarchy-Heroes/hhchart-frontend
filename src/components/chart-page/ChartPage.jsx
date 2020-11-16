@@ -48,12 +48,11 @@ export const ChartPage = props => {
     if (user.employeeId === employee.employeeId) return true;
     let currId = employee.managerId;
     while (currId > 0) {
-      // const managerIndex = 
-      console.log(currId);
+      const managerIndex = flatData.findIndex((emp) => {return emp.employeeId === currId}) 
       if (user.employeeId === currId) {
         return true;
       }
-      currId = flatData[currId - 1].managerId;
+      currId = flatData[managerIndex].managerId;
     }
     return false;
   }
