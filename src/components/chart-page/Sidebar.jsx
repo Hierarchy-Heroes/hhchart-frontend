@@ -24,10 +24,36 @@ const Sidebar = ({ node, onClickClose }) => {
     const body = {
       _id: node._id,
       // not sure about this one
-      image: form.employeeImage.value,
+      image: form.employeeImage.files[0],
     };
-    console.log(body);
     console.log(form.employeeImage);
+    console.log(form.employeeImage.files);
+    // console.log(form.files);
+    const formData = new FormData();
+    formData.append('_id', node._id);
+    formData.append('image', form.employeeImage.files[0]);
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'auth-token': authToken,
+          'Content-Type': 'application/json',
+          'Content-Length': JSON.stringify(body).length
+        },
+        body: formData
+      });
+      const text = await response.text();
+      if (response.ok) {
+        console.log(text);
+      } else {
+        alert(text);
+      }
+    } catch (err) {
+      console.log(err);
+      console.log(JSON.stringify(body));
+    }
+    // formData.append(0, form.employeeImage.files[0]);
+    // console.log(formData);
   }
 
   const handleSubmitEdit = async (e) => {
