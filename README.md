@@ -37,6 +37,30 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
+## SETUP
+
+**You must start the database before starting the web application**
+**Make sure you are not running both on the same localhost**
+
+Set up the backend
+
+  1. Clone the hhchart-backend repository: https://github.com/Hierarchy-Heroes/hhchart-backend.git
+
+  2. Run `yarn install` or `npm install`
+
+  3. After install has completed, run `yarn start` or `npm start`
+  
+Set up the frontend
+  
+  1. Clone the hhchart-frontend repository: https://github.com/Hierarchy-Heroes/hhchart-frontend.git
+
+  2. Run `yarn install` or `npm install`
+  
+  3. After install has completed, run `yarn start` or `npm start`
+  
+You can now use the Hierarchy Heroes Organizational Chart
+  
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
