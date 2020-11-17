@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 import { Button, Card, Col, Accordion, Form } from "react-bootstrap";
 
-const Sidebar = ({ node, onClickClose, isManager }) => {
+const Sidebar = ({ node, onClickClose, isManager, isSelf }) => {
   const [nodeState, setNodeState] = useState(null);
   const setNodeStateParams = (params) => {
     setNodeState({
@@ -145,10 +145,10 @@ const Sidebar = ({ node, onClickClose, isManager }) => {
         </Card.Body>
       </Card>
       {/*This is a card that contains an accordion.  Inside each accordion card, there is a nested form*/}
-      {isManager && <Card>
+      {(isManager || isSelf) && <Card>
         <Accordion>
           {/*This is the 'edit employee' section button*/}
-          <Card>
+          {(isManager || isSelf) && <Card>
             <Card.Header>
               <Accordion.Toggle as={Button} variant="none" eventKey="0">
                 Edit Employee<i className="fas fa-edit"></i>
@@ -184,9 +184,9 @@ const Sidebar = ({ node, onClickClose, isManager }) => {
                 </Form>
               </Card.Body>
             </Accordion.Collapse>
-          </Card>
+          </Card>}
           {/*This is the 'move employee' section*/}
-          <Card>
+          {isManager && <Card>
             <Card.Header>
               <Accordion.Toggle as={Button} variant="none" eventKey="1">
                 Move Employee<i class="fas fa-exchange-alt"></i>
@@ -206,10 +206,10 @@ const Sidebar = ({ node, onClickClose, isManager }) => {
                 </Form>
               </Card.Body>
             </Accordion.Collapse>
-          </Card>
+          </Card>}
 
           {/*This is the 'delete employee' section*/}
-          <Card>
+          {(isManager || isSelf) && <Card>
             <Card.Header>
               <Accordion.Toggle as={Button} variant="none" eventKey="2">Delete Employee<i className="fas fa-user-minus"></i></Accordion.Toggle>
             </Card.Header>
@@ -227,7 +227,7 @@ const Sidebar = ({ node, onClickClose, isManager }) => {
                 </Form>
               </Card.Body>
             </Accordion.Collapse>
-          </Card>
+          </Card>}
         </Accordion>
       </Card>}
     </div>

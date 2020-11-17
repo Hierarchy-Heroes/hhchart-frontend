@@ -45,16 +45,20 @@ export const ChartPage = props => {
 
   const isManager = (user, employee) => {
     if (user === null || employee === null) return false;
-    if (user.employeeId === employee.employeeId) return true;
     let currId = employee.managerId;
     while (currId > 0) {
-      const managerIndex = flatData.findIndex((emp) => {return emp.employeeId === currId}) 
+      const managerIndex = flatData.findIndex((emp) => { return emp.employeeId === currId })
       if (user.employeeId === currId) {
         return true;
       }
       currId = flatData[managerIndex].managerId;
     }
     return false;
+  }
+
+  const isSelf = (user, employee) => {
+    if (user === null || employee === null) return false;
+    return user.employeeId === employee.employeeId;
   }
 
   useEffect(() => {
@@ -82,7 +86,12 @@ export const ChartPage = props => {
   return (
     <div className="d-flex flex-row chartPage">
       <div className={`bg-light border-right chartPageSidebar ${sidebarVisible ? "chartPageSidebarVisible" : ""}`}>
-        <Sidebar node={currentNode} onClickClose={onClickClose} isManager={isManager(props.currentUser, currentNode)}></Sidebar>
+        <Sidebar
+          node={currentNode}
+          onClickClose={onClickClose}
+          isManager={isManager(props.currentUser, currentNode)}
+          isSelf={isSelf(props.currentUser, currentNode)}>
+        </Sidebar>
       </div>
       <SearchBar
         data={flatData}
