@@ -39,9 +39,9 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## SETUP
 
-**You must start the database before starting the web application**
+**You must start the database before starting the web application.**
 
-**Make sure you are not running both on the same localhost**
+**Make sure the frontend and backend are running on different localhosts.**
 
 Set up the backend
 
