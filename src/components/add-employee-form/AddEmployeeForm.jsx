@@ -97,7 +97,7 @@ const AddEmployeeForm = ({ visible, onClickClose }) => {
           </Form.Group>
           <Form.Group controlId="formAddStartDate">
             <Form.Label>Start Date</Form.Label>
-            <Form.Control type="text" placeholder="MM/DD/YYYY" name="startDate" />
+            <Form.Control type="text" placeholder="YYYY-MM-DD" name="startDate" />
           </Form.Group>
           <Form.Group controlId="formAddEmployeeId">
             <Form.Label>Employee ID</Form.Label>
