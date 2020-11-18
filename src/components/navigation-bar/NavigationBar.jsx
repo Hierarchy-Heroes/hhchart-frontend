@@ -47,7 +47,7 @@ const NavigationBar = (props) => {
 
   const logout = () => {
     window.sessionStorage.removeItem('authToken');
-    window.sessionStorage.removeItem('companyName')
+    //window.sessionStorage.removeItem('companyName')
     history.push('/login')
   }
 

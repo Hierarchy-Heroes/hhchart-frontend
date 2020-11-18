@@ -141,6 +141,7 @@ const Sidebar = ({ node, onClickClose, isManager, isSelf }) => {
         <Card.Body className="employee-display-info">
           <Card.Title>{node.firstName} {node.lastName}</Card.Title>
           <Card.Text>{node.positionTitle}</Card.Text>
+          <Card.Text className="start-date">Start Date: {node.startDate}</Card.Text>
           {/* <Card.Text>{node._id}</Card.Text> */}
         </Card.Body>
       </Card>
