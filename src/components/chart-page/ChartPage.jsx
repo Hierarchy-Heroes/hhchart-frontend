@@ -7,8 +7,8 @@ import './ChartPage.css';
 import { useHistory } from 'react-router-dom';
 
 export const ChartPage = props => {
-  const [treeData, setTreeData] = useState({});
-  const [flatData, setFlatData] = useState([]);
+  const [treeData, setTreeData] = useState(null);
+  const [flatData, setFlatData] = useState(null);
   const [currentNode, setCurrentNode] = useState(null);
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [searchVisibile, setSearchVisible] = useState(false);
@@ -77,6 +77,10 @@ export const ChartPage = props => {
   if (chartController) {
     chartController.zoom(zoomMag);
     chartController.pan(chartPosition);
+
+    if (currentNode) {
+      chartController.setSelectedEmployeeId(currentNode.employeeId);
+    }
   }
 
   return (
@@ -89,6 +93,12 @@ export const ChartPage = props => {
         visible={searchVisibile}
         handleClickOut={() => setSearchVisible(false)}
         onClickResult={(result) => {
+          setChartPosition(chartController.getPositionForEmployeeId(result.employeeId));
+          setChartPosition(chartController.getPositionForEmployeeId(result.employeeId));
+          setChartPosition(chartController.getPositionForEmployeeId(result.employeeId));
+          setChartPosition(chartController.getPositionForEmployeeId(result.employeeId));
+          setChartPosition(chartController.getPositionForEmployeeId(result.employeeId));
+
           setCurrentNode(result);
           setSidebarVisible(!!result);
           setSearchVisible(false);
@@ -99,12 +109,13 @@ export const ChartPage = props => {
         onMouseUp={() => setMouseDown(false)}
         onMouseMove={onMouseMove}
       >
-        <OrgChart 
+        {treeData && flatData && (<OrgChart 
           className="chartPageContentWrapper" 
           datasource={treeData} 
+          flatData={flatData}
           onClickNode={onClickNode} 
           onChartRender={setChartController} 
-        />
+        />)}
       </div>
       
       <ul className="fab-group">
