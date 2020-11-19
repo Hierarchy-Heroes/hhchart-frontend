@@ -22,7 +22,7 @@ const Sidebar = ({ node, onClickClose, isManager, isSelf }) => {
     const authToken = window.sessionStorage.getItem('authToken');
     const companyName = window.sessionStorage.getItem('companyName');
     // const form = e.currentTarget;
-    const url = `http://localhost:3000/employees/${companyName}/update`;
+    const url = `http://localhost:3000/employees/update`;
     const body = {
       _id: node._id,
       update: {
@@ -97,7 +97,7 @@ const Sidebar = ({ node, onClickClose, isManager, isSelf }) => {
     const authToken = window.sessionStorage.getItem('authToken');
     const companyName = window.sessionStorage.getItem('companyName');
     const form = e.currentTarget;
-    const url = `http://localhost:3000/employees/${companyName}/remove`;
+    const url = `http://localhost:3000/employees/remove`;
     const body = {
       '_id': node._id,
     }
@@ -141,6 +141,7 @@ const Sidebar = ({ node, onClickClose, isManager, isSelf }) => {
         <Card.Body className="employee-display-info">
           <Card.Title>{node.firstName} {node.lastName}</Card.Title>
           <Card.Text>{node.positionTitle}</Card.Text>
+          <Card.Text className="start-date">Start Date: {node.startDate}</Card.Text>
           {/* <Card.Text>{node._id}</Card.Text> */}
         </Card.Body>
       </Card>

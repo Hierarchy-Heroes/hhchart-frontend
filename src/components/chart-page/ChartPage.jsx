@@ -7,11 +7,16 @@ import './ChartPage.css';
 import { useHistory } from 'react-router-dom';
 
 export const ChartPage = props => {
-  const [treeData, setTreeData] = useState({});
-  const [flatData, setFlatData] = useState([]);
+  const [treeData, setTreeData] = useState(null);
+  const [flatData, setFlatData] = useState(null);
   const [currentNode, setCurrentNode] = useState(null);
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [searchVisibile, setSearchVisible] = useState(false);
+  const [zoomMag, setZoomMag] = useState(1.0);
+  const [chartController, setChartController] = useState(null);
+  const [mouseDown, setMouseDown] = useState(false);
+  const [chartPosition, setChartPosition] = useState({x: 0, y: 0});
+
   const history = useHistory();
 
   const getCollection = async (collection) => {
@@ -73,15 +78,29 @@ export const ChartPage = props => {
 
   const onClickClose = () => setSidebarVisible(false);
 
-  // const [zoomMag, setZoomMag] = useState(1.0);
-  let zoomMag = 1.0;
+  const onMouseMove = event => {
+    if (mouseDown) {
+      setChartPosition({
+        x: chartPosition.x + event.nativeEvent.movementX, 
+        y: chartPosition.y + event.nativeEvent.movementY
+      });
+    }
+  }
+
   const zoom = (mag) => {
     if (zoomMag < 2 && mag > 0 || zoomMag > 0.2 && mag < 0) {
-      zoomMag += mag;
+      setZoomMag(zoomMag + mag);
     }
-    const chart = document.getElementsByClassName('orgchart')[0].children[0];
-    chart.setAttribute('style', `transform: scale(${zoomMag})`);
   };
+
+  if (chartController) {
+    chartController.zoom(zoomMag);
+    chartController.pan(chartPosition);
+
+    if (currentNode) {
+      chartController.setSelectedEmployeeId(currentNode.employeeId);
+    }
+  }
 
   return (
     <div className="d-flex flex-row chartPage">
@@ -98,13 +117,31 @@ export const ChartPage = props => {
         visible={searchVisibile}
         handleClickOut={() => setSearchVisible(false)}
         onClickResult={(result) => {
+          setChartPosition(chartController.getPositionForEmployeeId(result.employeeId));
+          setChartPosition(chartController.getPositionForEmployeeId(result.employeeId));
+          setChartPosition(chartController.getPositionForEmployeeId(result.employeeId));
+          setChartPosition(chartController.getPositionForEmployeeId(result.employeeId));
+          setChartPosition(chartController.getPositionForEmployeeId(result.employeeId));
+
           setCurrentNode(result);
           setSidebarVisible(!!result);
           setSearchVisible(false);
-          // document.getElementById(result.id).classList.add('selected');
         }}
       />
-      <OrgChart className="chartPageContentWrapper" datasource={treeData} onClickNode={onClickNode} />
+      <div 
+        onMouseDown={() => setMouseDown(true)}
+        onMouseUp={() => setMouseDown(false)}
+        onMouseMove={onMouseMove}
+      >
+        {treeData && flatData && (<OrgChart 
+          className="chartPageContentWrapper" 
+          datasource={treeData} 
+          flatData={flatData}
+          onClickNode={onClickNode} 
+          onChartRender={setChartController} 
+        />)}
+      </div>
+      
       <ul className="fab-group">
         <li>
           <OverlayTrigger placement='left' overlay={<Tooltip>Zoom-In</Tooltip>}>

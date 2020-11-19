@@ -14,7 +14,7 @@ export const LoginPage = (props) => {
     const url = 'http://localhost:3000/auth/login';
     const body = {
       'email': form.email.value,
-      'companyName': form.company.value,
+      //'companyName': form.company.value,
       'password': form.password.value
     }
     try {
@@ -30,7 +30,7 @@ export const LoginPage = (props) => {
       if (response.ok) {
         console.log(text);
         window.sessionStorage.setItem('authToken', text);
-        window.sessionStorage.setItem('companyName', form.company.value.replace(/\s/g, ''));
+        //window.sessionStorage.setItem('companyName', form.company.value.replace(/\s/g, ''));
         history.push('/');
         return true;
       } else {
@@ -46,16 +46,7 @@ export const LoginPage = (props) => {
 
   return (
     <Form className="login-container" onSubmit={handleSubmit}>
-      <Form.Group className="mx-auto">
-        <Form.Label>Company</Form.Label>
-        <Form.Control as="select" name="company">
-          <option disabled selected value="">Select a company</option>
-          <option>Cyclone Aviation</option>
-          <option>Nightwell Enterprises</option>
-          <option>Tiger Microsystems</option>
-        </Form.Control>
-      </Form.Group>
-      <Form.Group className="user mx-auto">
+      <Form.Group id="email-space"className="user mx-auto">
         <Form.Label>E-mail</Form.Label>
         <Form.Control type="email" placeholder="Enter e-mail" name="email" />
       </Form.Group>
