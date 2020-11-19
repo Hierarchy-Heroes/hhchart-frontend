@@ -72,16 +72,17 @@ const NavigationBar = (props) => {
     const companyName = `${props.currentUser.companyName}`;
     const jobTitle = `${props.currentUser.positionTitle}`;
     const id = `${props.currentUser.employeeId}`;
+    const isManager = props.currentUser.isManager;
 
     return (
       <Navbar className="color-nav" variant="dark">
         <Navbar.Brand className="title" href="/">{companyName}</Navbar.Brand>
         <Nav className="mr-auto">
         </Nav>
-        <div>
-          <AddEmployeeForm visible={addEmployeeVisible} onClickClose={onClickClose}></AddEmployeeForm>
+        {isManager && <div>
+          <AddEmployeeForm currentUser={props.currentUser} visible={addEmployeeVisible} onClickClose={onClickClose}></AddEmployeeForm>
           <Button variant="outline-light" className="mr-sm-2" onClick={onClickOpen}>Add Employee</Button>
-        </div>
+        </div>}
         <DropdownButton className="account-btn" noCaret variant="outline-light" title=
           {<div className="user-icon">
             <i class="fas fa-user-circle" id="profile-icon"></i>

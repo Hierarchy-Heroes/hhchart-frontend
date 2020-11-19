@@ -1,43 +1,33 @@
 import React from 'react';
 import { Modal, Button, Form } from "react-bootstrap";
 
-const AddEmployeeForm = ({ visible, onClickClose }) => {
+const AddEmployeeForm = ({ currentUser, visible, onClickClose }) => {
   var isManager = false;
 
   const handleManagerCheck = () => {
     isManager = !isManager;
   }
 
+  console.log(currentUser);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.currentTarget;
     const authToken = window.sessionStorage.getItem('authToken');
-    const companyName = window.sessionStorage.getItem('companyName');
+    const companyNameCurrent = currentUser.companyName;
+    const companyIdCurrent = currentUser.companyId;
+    const employeeIdCurrent = currentUser.employeeId;
     const url = `http://localhost:3000/employees/add`;
-    var companyId = 0;
-    switch (companyName) {
-      case 'CycloneAviation':
-        companyId = 1;
-        break;
-      case 'NightwellEnterprises':
-        companyId = 3;
-        break;
-      case 'TigerMicrosystems':
-        companyId = 2;
-        break;
-      default:
-        companyId = 0;
-    }
     const body = {
       'firstName': form.firstName.value,
       'lastName': form.lastName.value,
-      'companyId': companyId, //"OPTIONAL"
+      'companyId': companyIdCurrent,
       'password': 'password',
       'positionTitle': form.positionTitle.value, //OPTIONAL
-      'companyName': companyName,
+      'companyName': companyNameCurrent,
       'isManager': isManager,
-      'employeeId': form.employeeId.value, //implement
-      'managerId': form.employeeId.value, //implement
+      'employeeId': -1,
+      'managerId': employeeIdCurrent, //implement
       'email': form.email.value,
       'startDate': form.startDate.value //OPTIONAL
     }
@@ -98,14 +88,6 @@ const AddEmployeeForm = ({ visible, onClickClose }) => {
           <Form.Group controlId="formAddStartDate">
             <Form.Label>Start Date</Form.Label>
             <Form.Control type="text" placeholder="YYYY-MM-DD" name="startDate" />
-          </Form.Group>
-          <Form.Group controlId="formAddEmployeeId">
-            <Form.Label>Employee ID</Form.Label>
-            <Form.Control type="text" placeholder="Enter employee id" name="employeeId" />
-          </Form.Group>
-          <Form.Group controlId="formAddManagerId">
-            <Form.Label>Manager ID</Form.Label>
-            <Form.Control type="text" placeholder="Enter manager id" name="managerId" />
           </Form.Group>
           <Form.Group controlId="formAddIsManager">
             <Form.Check type="checkbox" label="Manager" onChange={handleManagerCheck} />
