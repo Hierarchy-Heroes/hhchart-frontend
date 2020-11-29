@@ -14,6 +14,10 @@ const Sidebar = ({ node, onClickClose }) => {
 
   useEffect(() => {
     setNodeState(node);
+    if (node) {
+      console.log(node)
+      // console.log(`data:image/png;base64${btoa(node.img.buffer.data)}`)
+    }
   }, [node])
 
   const handleSubmitImage = async (e) => {
@@ -21,24 +25,14 @@ const Sidebar = ({ node, onClickClose }) => {
     const form = e.currentTarget;
     const authToken = window.sessionStorage.getItem('authToken');
     const url = 'http://localhost:3000/employees/upload-image';
-    const body = {
-      _id: node._id,
-      // not sure about this one
-      image: form.employeeImage.files[0],
-    };
-    console.log(form.employeeImage);
-    console.log(form.employeeImage.files);
-    // console.log(form.files);
     const formData = new FormData();
     formData.append('_id', node._id);
-    formData.append('image', form.employeeImage.files[0]);
+    formData.append('employeeImg', form.employeeImage.files[0]);
     try {
       const response = await fetch(url, {
         method: 'POST',
         headers: {
           'auth-token': authToken,
-          'Content-Type': 'application/json',
-          'Content-Length': JSON.stringify(body).length
         },
         body: formData
       });
@@ -46,14 +40,12 @@ const Sidebar = ({ node, onClickClose }) => {
       if (response.ok) {
         console.log(text);
       } else {
-        alert(text);
+        console.log(text);
       }
     } catch (err) {
       console.log(err);
-      console.log(JSON.stringify(body));
+      console.log(formData.get('image'));
     }
-    // formData.append(0, form.employeeImage.files[0]);
-    // console.log(formData);
   }
 
   const handleSubmitEdit = async (e) => {
@@ -177,7 +169,7 @@ const Sidebar = ({ node, onClickClose }) => {
       </Col>
       {/*This is the profile picture and employee information displayed*/}
       <Card className="mb-4">
-        <Card.Img className="employee-display-image" variant="top" src={nodeState.img && nodeState.img.buffer ? `data:image/png;base64${btoa(nodeState.img.buffer.data)}` : "https://upload.wikimedia.org/wikipedia/commons/7/7c/User_font_awesome.svg"} height="250px" />
+        <Card.Img className="employee-display-image" variant="top" src={(nodeState.img && nodeState.img.buffer) ? `data:image/png;base64${btoa(nodeState.img.buffer.data)}` : "https://upload.wikimedia.org/wikipedia/commons/7/7c/User_font_awesome.svg"} height="250px" />
         <Card.Body className="employee-display-info">
           <Card.Title>{node.firstName} {node.lastName}</Card.Title>
           <Card.Text>{node.positionTitle}</Card.Text>
@@ -200,7 +192,7 @@ const Sidebar = ({ node, onClickClose }) => {
                   <Form className="form-body" encType="multipart/form-data" onSubmit={handleSubmitImage}>
                     <Form.Group>
                       <Form.Label>Upload Image</Form.Label>
-                      <Form.File name="employeeImage" accept="image/png" style={{ margin: "15px 0" }} required/>
+                      <Form.File name="employeeImage" accept="image/png" style={{ margin: "15px 0" }} required />
                     </Form.Group>
                     <Col className="text-center">
                       <Button variant="primary" className="mb" type="submit">Upload</Button>
