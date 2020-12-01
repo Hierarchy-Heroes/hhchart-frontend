@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './NavBar.css';
-import { Nav, Navbar, DropdownButton, Dropdown, } from 'react-bootstrap';
+import { Nav, Navbar, Button, DropdownButton, Dropdown, } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router-dom';
-
+import AddEmployeeForm from '../add-employee-form/AddEmployeeForm';
 
 const NavigationBar = (props) => {
+  const [addEmployeeVisible, setAddEmployeeVisible] = useState(false);
   const history = useHistory();
   const location = useLocation();
 
@@ -45,6 +46,9 @@ const NavigationBar = (props) => {
     }
   }
 
+  const onClickOpen = () => setAddEmployeeVisible(true);
+  const onClickClose = () => setAddEmployeeVisible(false);
+
   const logout = () => {
     window.sessionStorage.removeItem('authToken');
     //window.sessionStorage.removeItem('companyName')
@@ -68,12 +72,17 @@ const NavigationBar = (props) => {
     const companyName = `${props.currentUser.companyName}`;
     const jobTitle = `${props.currentUser.positionTitle}`;
     const id = `${props.currentUser.employeeId}`;
+    const isManager = props.currentUser.isManager;
 
     return (
       <Navbar className="color-nav" variant="dark">
         <Navbar.Brand className="title" href="/">{companyName}</Navbar.Brand>
         <Nav className="mr-auto">
         </Nav>
+        {isManager && <div>
+          <AddEmployeeForm currentUser={props.currentUser} visible={addEmployeeVisible} onClickClose={onClickClose}></AddEmployeeForm>
+          <Button variant="outline-light" className="mr-sm-2" onClick={onClickOpen}>Add Employee</Button>
+        </div>}
         <DropdownButton className="account-btn" noCaret variant="outline-light" title=
           {<div className="user-icon">
             <i class="fas fa-user-circle" id="profile-icon"></i>
