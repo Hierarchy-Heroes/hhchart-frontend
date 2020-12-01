@@ -2,13 +2,11 @@ import React from 'react';
 import { Modal, Button, Form } from "react-bootstrap";
 
 const AddEmployeeForm = ({ currentUser, visible, onClickClose }) => {
+  //variable and function used to toggle isManager field for a new employee
   var isManager = false;
-
   const handleManagerCheck = () => {
     isManager = !isManager;
   }
-
-  console.log(currentUser);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,13 +21,13 @@ const AddEmployeeForm = ({ currentUser, visible, onClickClose }) => {
       'lastName': form.lastName.value,
       'companyId': companyIdCurrent,
       'password': 'password',
-      'positionTitle': form.positionTitle.value, //OPTIONAL
+      'positionTitle': form.positionTitle.value,
       'companyName': companyNameCurrent,
       'isManager': isManager,
-      'employeeId': -1,
-      'managerId': employeeIdCurrent, //implement
+      'employeeId': -1, //employeeId is generated in the backend
+      'managerId': employeeIdCurrent,
       'email': form.email.value,
-      'startDate': form.startDate.value //OPTIONAL
+      'startDate': form.startDate.value
     }
     try {
       const response = await fetch(url, {
