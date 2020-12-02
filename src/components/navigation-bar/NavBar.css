@@ -44,3 +44,15 @@
     text-align: center;
     margin-right: 7px;
 }
+
+.form-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+.upload {
+    margin: 20px;
+    align-self: center;
+}
