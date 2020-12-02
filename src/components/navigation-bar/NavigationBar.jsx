@@ -17,6 +17,56 @@ const NavigationBar = (props) => {
     history.push('/login')
   }
 
+  /*
+  const importTree = async (e) => {
+    e.preventDefault();
+    const authToken = window.sessionStorage.getItem('authToken');
+    const form = e.currentTarget;
+    const url = `http://localhost:3000/employees/import`;
+    const body = {
+      'uploadedFile': form.uploadTree.value,
+    }
+    console.log(body)
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'auth-token': authToken,
+          'Content-Type': 'application/json',
+          'Content-Length': JSON.stringify(body).length
+        },
+        body: JSON.stringify(body)
+      });
+      const text = await response.text();
+      if (response.ok) {
+        console.log(text);
+      } else {
+        alert(text);
+      }
+    } catch (err) {
+      console.error(err);
+      console.log(JSON.stringify(body));
+    }
+  }
+  */
+
+  function importTree(upload) {
+    const oOutput = document.querySelector("div");
+    const oData = new FormData(upload);
+    const oReq = new XMLHttpRequest();
+
+    oReq.open("POST", "http://localhost:3000/employees/import", true);
+    oReq.onload = function(oEvent) {
+      if (oReq.statue = 200) {
+        oOutput.innerHTML = "Uploaded!";
+      } else {
+        oOutput.innerHTML = "Error " + oReq.statue + " occurred when trying to upload your file.<br \/>";
+      }
+    }
+
+    oReq.send(oData);
+  }
+
   if(props.isLoggedIn === 'false'){
     return (
       <Navbar className = "color-nav" variant="dark">
@@ -33,7 +83,7 @@ const NavigationBar = (props) => {
         <Navbar.Brand className="title" href="/">Hierarchy Heroes</Navbar.Brand>
         <Nav className="mr-auto"></Nav>
 
-        <DropdownButton className="account-btn" noCaret variant="outline-light" title=
+        <DropdownButton className="account-btn" title=
           {<div className="user-icon">
           <i class="fas fa-user-circle" id="profile-icon"></i>
           <i class="fas fa-caret-down" id="dropdown-icon"></i>
@@ -47,7 +97,7 @@ const NavigationBar = (props) => {
           <Dropdown.Item href="/login" className="dropdown-items" eventKey="6" onClick={() => {logout()}}>Logout<i className="fas fa-sign-out-alt"></i></Dropdown.Item>
         </DropdownButton>
 
-        <DropdownButton className="settings-btn" noCaret varient="outline-light" title = 
+        <DropdownButton className="settings-btn" title = 
           {<div className="user-icon">
           <i class="fas fa-cog" id="profile-icon"></i>
           <i class="fas fa-caret-down" id="dropdown-icon"></i>
@@ -60,14 +110,18 @@ const NavigationBar = (props) => {
           <Modal.Header closeButton>
             <Modal.Title>Import Tree</Modal.Title>
           </Modal.Header>
-        <Modal.Body>
-          <Form.File id="uploadedTree"></Form.File>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>Close </Button>
-          <Button variant="primary" onClick={handleClose}>Upload</Button>
-        </Modal.Footer>
+          <Modal.Body>
+            <form enctype="multipart/form-data" name="fileinfo">
+              <input type="file" name="employeeJSON" />
+              <input type="submit" value="Upload a file" />
+            </form>
+          </Modal.Body>
         </Modal>
+
+        <script src="ImportTree.jsx" async></script>
+        <script>var form = document.forms.namedItem("fileinfo");</script>
+        <script>form.addEventListener('submit', importTree(form), false);</script>
+
       </Navbar>
     );
   }

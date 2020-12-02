@@ -25,3 +25,22 @@
 .dropdown-toggle::after{
     display: none;
 }
+
+.importTreeButtons {
+    display: flex;
+    margin: auto;
+}
+
+.import {
+    justify-content: center;
+    display: inline;
+    text-align: center;
+    border-color: rgb(0, 130, 99);
+}
+
+.import-close {
+    justify-content: center;
+    display: inline;
+    text-align: center;
+    margin-right: 7px;
+}

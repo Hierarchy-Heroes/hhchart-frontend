@@ -22,7 +22,7 @@ const Sidebar = ({ node, onClickClose }) => {
     const authToken = window.sessionStorage.getItem('authToken');
     const companyName = window.sessionStorage.getItem('companyName');
     // const form = e.currentTarget;
-    const url = `http://localhost:3000/employees/${companyName}/update`;
+    const url = `http://localhost:3000/employees/update`;
     const body = {
       _id: node._id,
       update: {
@@ -97,7 +97,7 @@ const Sidebar = ({ node, onClickClose }) => {
     const authToken = window.sessionStorage.getItem('authToken');
     const companyName = window.sessionStorage.getItem('companyName');
     const form = e.currentTarget;
-    const url = `http://localhost:3000/employees/${companyName}/remove`;
+    const url = `http://localhost:3000/employees/remove`;
     const body = {
       '_id': node._id,
     }
