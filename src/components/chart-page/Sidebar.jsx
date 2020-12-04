@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 import { Button, Card, Col, Accordion, Form } from "react-bootstrap";
 
-const Sidebar = ({ node, onClickClose, isManager, isSelf }) => {
+const Sidebar = ({ flatData, node, onClickClose, isManager, isSelf }) => {
   const [nodeState, setNodeState] = useState(null);
   const setNodeStateParams = (params) => {
     setNodeState({
@@ -60,15 +60,27 @@ const Sidebar = ({ node, onClickClose, isManager, isSelf }) => {
     // add: onClickClose
     e.preventDefault();
     const form = e.currentTarget;
-    const url = 'move employee endpoint placeholder';
+    const url = 'http://localhost:3000/employees/transfer-request';
+    const authToken = window.sessionStorage.getItem('authToken');
+
+    const newManagerPossible = flatData.filter(emp => (emp.firstName + " " + emp.lastName) === form.moveManager.value);
+    if (newManagerPossible.length === 0) {
+      alert("New Manager does not exist");
+      console.log(flatData);
+      return;
+    }
+
     const body = {
-      'newManager': form.moveManager.value
+      newManagerId: newManagerPossible[0]._id,
+      employeeId: node._id,
+      transferType: "team",
     }
     console.log(body.newManager)
     try {
       const response = await fetch(url, {
         method: 'POST',
         headers: {
+          'auth-token': authToken,
           'Content-Type': 'application/json',
           'Content-Length': JSON.stringify(body).length
         },

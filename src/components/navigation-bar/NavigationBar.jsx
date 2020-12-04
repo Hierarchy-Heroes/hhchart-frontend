@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './NavBar.css';
-import { Nav, Navbar, Button, DropdownButton, Dropdown, } from 'react-bootstrap';
+import { Nav, Navbar, Button, DropdownButton, Dropdown, Form, Modal } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router-dom';
 import AddEmployeeForm from '../add-employee-form/AddEmployeeForm';
 

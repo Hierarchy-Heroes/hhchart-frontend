@@ -106,6 +106,7 @@ export const ChartPage = props => {
     <div className="d-flex flex-row chartPage">
       <div className={`bg-light border-right chartPageSidebar ${sidebarVisible ? "chartPageSidebarVisible" : ""}`}>
         <Sidebar
+          flatData={flatData}
           node={currentNode}
           onClickClose={onClickClose}
           isManager={isManager(props.currentUser, currentNode)}
