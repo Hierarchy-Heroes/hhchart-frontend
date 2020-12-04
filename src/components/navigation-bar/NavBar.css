@@ -33,7 +33,7 @@
     -ms-transition: all 0.4s;
     -o-transition: all 0.4s;
     transition: all 0.4s;
-
+    
     max-height: 0;
     display: block;
     overflow: hidden;
@@ -43,4 +43,35 @@
 .dropdown.show .dropdown-menu { /* For Bootstrap 4, use .dropdown.show instead of .dropdown.open */
     max-height: 300px;
     opacity: 1;
+}
+
+.importTreeButtons {
+    display: flex;
+    margin: auto;
+}
+
+.import {
+    justify-content: center;
+    display: inline;
+    text-align: center;
+    border-color: rgb(0, 130, 99);
+}
+
+.import-close {
+    justify-content: center;
+    display: inline;
+    text-align: center;
+    margin-right: 7px;
+}
+
+.form-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+.upload {
+    margin: 20px;
+    align-self: center;
 }

@@ -3,6 +3,7 @@ import './LoginPage.css';
 import { Button, Form, } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
+import baseApiUrl from "../../base-url"
 
 export const LoginPage = (props) => {
   const history = useHistory();
@@ -11,7 +12,7 @@ export const LoginPage = (props) => {
     e.preventDefault();
     const form = e.currentTarget;
     // resquest = server + port + auth/login
-    const url = 'http://localhost:3000/auth/login';
+    const url = `${baseApiUrl}/auth/login`;
     const body = {
       'email': form.email.value,
       //'companyName': form.company.value,

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Modal, Button, Form } from "react-bootstrap";
 
+import baseApiUrl from "../../base-url"
+
 const AddEmployeeForm = ({ currentUser, visible, onClickClose }) => {
   //variable and function used to toggle isManager field for a new employee
   var isManager = false;
@@ -15,7 +17,7 @@ const AddEmployeeForm = ({ currentUser, visible, onClickClose }) => {
     const companyNameCurrent = currentUser.companyName;
     const companyIdCurrent = currentUser.companyId;
     const employeeIdCurrent = currentUser.employeeId;
-    const url = `http://localhost:3000/employees/add`;
+    const url = `${baseApiUrl}/employees/add`;
     const body = {
       'firstName': form.firstName.value,
       'lastName': form.lastName.value,

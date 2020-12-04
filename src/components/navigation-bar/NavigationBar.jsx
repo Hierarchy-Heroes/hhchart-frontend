@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './NavBar.css';
-import { Nav, Navbar, Button, DropdownButton, Dropdown, } from 'react-bootstrap';
+import { Nav, Navbar, Button, DropdownButton, Dropdown, Form, Modal } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router-dom';
 import AddEmployeeForm from '../add-employee-form/AddEmployeeForm';
+
+import baseApiUrl from "../../base-url"
 
 const NavigationBar = (props) => {
   const [addEmployeeVisible, setAddEmployeeVisible] = useState(false);
@@ -23,7 +25,7 @@ const NavigationBar = (props) => {
       const authToken = window.sessionStorage.getItem('authToken');
       if (authToken === null) return;
       // const companyName = window.sessionStorage.getItem('companyName');
-      const url = `http://localhost:3000/employees/usr`;
+      const url = `${baseApiUrl}/employees/usr`;
       try {
         const response = await fetch(url, {
           method: 'GET',
@@ -49,13 +51,44 @@ const NavigationBar = (props) => {
   const onClickOpen = () => setAddEmployeeVisible(true);
   const onClickClose = () => setAddEmployeeVisible(false);
 
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
+
   const logout = () => {
     window.sessionStorage.removeItem('authToken');
     //window.sessionStorage.removeItem('companyName')
     history.push('/login')
   }
 
-  if (!props.currentUser) {
+  const importTree = async (e) => {
+    e.preventDefault();
+    const authToken = window.sessionStorage.getItem('authToken');
+    const form = e.currentTarget;
+    const url = `${baseApiUrl}/employees/import`;
+    const formData = new FormData();
+    formData.append('employeeJSON', form.employeeJSON.files[0]);
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'auth-token': authToken,
+        },
+        body: formData
+      });
+      const text = await response.text();
+      if (response.ok) {
+        console.log(text);
+      } else {
+        alert(text);
+      }
+    } catch (err) {
+      console.error(err);
+      console.log(formData.get('employeeJSON'));
+    }
+  }
+
+  if (props.isLoggedIn === 'false') {
     return (
       <Navbar className="color-nav" variant="dark">
         <Navbar.Brand className="title" href="/">Hierarchy Heroes</Navbar.Brand>
@@ -96,6 +129,27 @@ const NavigationBar = (props) => {
           <Dropdown.Divider />
           <Dropdown.Item href="/login" className="dropdown-items" eventKey="6" onClick={() => { logout() }}>Logout<i className="fas fa-sign-out-alt"></i></Dropdown.Item>
         </DropdownButton>
+
+        <DropdownButton className="settings-btn" title=
+          {<div className="user-icon">
+            <i class="fas fa-cog" id="profile-icon"></i>
+            <i class="fas fa-caret-down" id="dropdown-icon"></i>
+          </div>}
+          alignRight id="dropdown-menu-align-right">
+          <Dropdown.Item className="dropdown-items" eventKey="1" onClick={handleShow}>Import tree...</Dropdown.Item>
+        </DropdownButton>
+
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Import Tree</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form encType="multipart/form-data" onSubmit={importTree} className="form-body">
+              <Form.File name="employeeJSON" accept="application/json" required />
+              <Button className="upload" variant="primary" type="submit">Upload</Button>
+            </Form>
+          </Modal.Body>
+        </Modal>
       </Navbar>
     );
   }
