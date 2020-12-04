@@ -7,7 +7,7 @@ In the project directory, you can run:
 ### `yarn start`
 
 Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:8000](http://localhost:8000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
@@ -57,7 +57,11 @@ Set up the frontend
 
   2. Run `yarn install` or `npm install`
   
-  3. After install has completed, run `yarn start` or `npm start`
+  3. In `src/base-url.js`, edit `baseApiUrl` to where your backend is hosted
+
+  4. Change the port in package.js if required
+  
+  5. After install has completed, run `yarn start` or `npm start`.
   
 You can now use the Hierarchy Heroes Organizational Chart
   

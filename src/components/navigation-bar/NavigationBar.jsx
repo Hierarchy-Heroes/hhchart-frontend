@@ -4,6 +4,8 @@ import { Nav, Navbar, Button, DropdownButton, Dropdown, Form, Modal } from 'reac
 import { useHistory, useLocation } from 'react-router-dom';
 import AddEmployeeForm from '../add-employee-form/AddEmployeeForm';
 
+import baseApiUrl from "../../base-url"
+
 const NavigationBar = (props) => {
   const [addEmployeeVisible, setAddEmployeeVisible] = useState(false);
   const history = useHistory();
@@ -23,7 +25,7 @@ const NavigationBar = (props) => {
       const authToken = window.sessionStorage.getItem('authToken');
       if (authToken === null) return;
       // const companyName = window.sessionStorage.getItem('companyName');
-      const url = `http://localhost:3000/employees/usr`;
+      const url = `${baseApiUrl}/employees/usr`;
       try {
         const response = await fetch(url, {
           method: 'GET',
@@ -63,7 +65,7 @@ const NavigationBar = (props) => {
     e.preventDefault();
     const authToken = window.sessionStorage.getItem('authToken');
     const form = e.currentTarget;
-    const url = `http://localhost:3000/employees/import`;
+    const url = `${baseApiUrl}/employees/import`;
     const formData = new FormData();
     formData.append('employeeJSON', form.employeeJSON.files[0]);
     try {

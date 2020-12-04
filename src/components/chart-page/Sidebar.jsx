@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 
 import { Button, Card, Col, Accordion, Form } from "react-bootstrap";
 
+import baseApiUrl from "../../base-url"
+
 const Sidebar = ({ flatData, node, onClickClose, isManager, isSelf }) => {
   const [nodeState, setNodeState] = useState(null);
   const setNodeStateParams = (params) => {
@@ -22,7 +24,7 @@ const Sidebar = ({ flatData, node, onClickClose, isManager, isSelf }) => {
     const authToken = window.sessionStorage.getItem('authToken');
     const companyName = window.sessionStorage.getItem('companyName');
     // const form = e.currentTarget;
-    const url = `http://localhost:3000/employees/update`;
+    const url = `${baseApiUrl}/employees/update`;
     const body = {
       _id: node._id,
       update: {
@@ -60,7 +62,7 @@ const Sidebar = ({ flatData, node, onClickClose, isManager, isSelf }) => {
     // add: onClickClose
     e.preventDefault();
     const form = e.currentTarget;
-    const url = 'http://localhost:3000/employees/transfer-request';
+    const url = `${baseApiUrl}/employees/transfer-request`;
     const authToken = window.sessionStorage.getItem('authToken');
 
     const newManagerPossible = flatData.filter(emp => (emp.firstName + " " + emp.lastName) === form.moveManager.value);
@@ -109,7 +111,7 @@ const Sidebar = ({ flatData, node, onClickClose, isManager, isSelf }) => {
     const authToken = window.sessionStorage.getItem('authToken');
     const companyName = window.sessionStorage.getItem('companyName');
     const form = e.currentTarget;
-    const url = `http://localhost:3000/employees/remove`;
+    const url = `${baseApiUrl}/employees/remove`;
     const body = {
       '_id': node._id,
     }

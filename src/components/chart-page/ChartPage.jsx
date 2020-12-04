@@ -6,6 +6,8 @@ import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import './ChartPage.css';
 import { useHistory } from 'react-router-dom';
 
+import baseApiUrl from "../../base-url"
+
 export const ChartPage = props => {
   const [treeData, setTreeData] = useState(null);
   const [flatData, setFlatData] = useState(null);
@@ -21,7 +23,7 @@ export const ChartPage = props => {
 
   const getCollection = async (collection) => {
     const authToken = window.sessionStorage.getItem('authToken');
-    const url = `http://localhost:3000/employees/${collection}`;
+    const url = `${baseApiUrl}/employees/${collection}`;
     try {
       const response = await fetch(url, {
         method: 'GET',
