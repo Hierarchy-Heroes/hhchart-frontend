@@ -4,6 +4,10 @@
     /* width: fit-content; */
 }
 
+#email-space{
+    padding-top: 25px;
+}
+
 .loginButtons {
     justify-content: center;
     display: inline;

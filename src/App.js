@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -8,21 +8,23 @@ import NavigationBar from './components/navigation-bar/NavigationBar';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-const App = () => (
-  <div className="routerContainer">
-    <Router>
-      <Switch>
-        <Route path="/login">
-          <NavigationBar isLoggedIn = 'false'/>
-          <LoginPage />
-        </Route>
-        <Route path="/">
-          <NavigationBar isLoggedIn = 'true'/>
-          <ChartPage />
-        </Route>
-      </Switch>
-    </Router>
-  </div>  
-);
+const App = () => {
+  const [currentUser, setCurrentUser] = useState(null);
+  return (
+    <div className="routerContainer">
+      <Router>
+        <NavigationBar currentUser={currentUser} setCurrentUser={setCurrentUser} />
+        <Switch>
+          <Route path="/login">
+            <LoginPage />
+          </Route>
+          <Route path="/">
+            <ChartPage currentUser={currentUser}/>
+          </Route>
+        </Switch>
+      </Router>
+    </div>
+  )
+};
 
 export default App;

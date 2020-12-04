@@ -8,6 +8,7 @@
 
 .user-icon i{
     padding: 3px;
+    font-size: 22px;
     align-items: center;
     justify-content: center;
 }
@@ -24,6 +25,24 @@
 
 .dropdown-toggle::after{
     display: none;
+}
+
+.dropdown .dropdown-menu {
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -ms-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
+    
+    max-height: 0;
+    display: block;
+    overflow: hidden;
+    opacity: 0;
+}
+
+.dropdown.show .dropdown-menu { /* For Bootstrap 4, use .dropdown.show instead of .dropdown.open */
+    max-height: 300px;
+    opacity: 1;
 }
 
 .importTreeButtons {
